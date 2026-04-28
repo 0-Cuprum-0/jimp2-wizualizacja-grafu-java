@@ -1,0 +1,23 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{SpringEmbedder}\PYG{p}{(}\PYG{n}{G}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{minimalna\PYGZus{}sila}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{maks\PYGZus{}iteracji}\PYG{p}{)}
+\PYG{c+c1}{//minimalna\PYGZus{}sila = bardzo mała wartość ogranicza działanie algorytmu i zatrzymuje pracę}
+\PYG{c+c1}{//kiedy maksymalna znaleziona siła jest mniejsza niż minimalna\PYGZus{}sila}
+\PYG{n}{t}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}
+\PYG{n}{max\PYGZus{}sila}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{duza\PYGZus{}wartosc}\PYG{+w}{ }\PYG{c+c1}{// maksymalna siła działająca na jeden z wierzchołków}
+
+\PYG{k}{while}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{t}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{maks\PYGZus{}iteracji}\PYG{+w}{ }\PYG{n}{AND}\PYG{+w}{ }\PYG{n}{max\PYGZus{}sila}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{minimalna\PYGZus{}sila}\PYG{p}{)}
+
+\PYG{+w}{    }\PYG{n}{dla}\PYG{+w}{ }\PYG{n}{każdego}\PYG{+w}{ }\PYG{n}{wierzchołka}\PYG{+w}{ }\PYG{n}{v}\PYG{+w}{ }\PYG{n}{w}\PYG{+w}{ }\PYG{n}{G}
+\PYG{+w}{        }\PYG{n}{oblicz}\PYG{+w}{ }\PYG{n}{siły}\PYG{+w}{ }\PYG{n}{odpychania}\PYG{+w}{ }\PYG{n}{od}\PYG{+w}{ }\PYG{n}{wszystkich}\PYG{+w}{ }\PYG{n}{innych}\PYG{+w}{ }\PYG{n}{wierzchołków}
+
+\PYG{+w}{    }\PYG{n}{dla}\PYG{+w}{ }\PYG{n}{każdej}\PYG{+w}{ }\PYG{n}{krawędzi}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{v}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{w}\PYG{+w}{ }\PYG{n}{G}
+\PYG{+w}{        }\PYG{n}{oblicz}\PYG{+w}{ }\PYG{n}{siłę}\PYG{+w}{ }\PYG{n}{przyciągania}\PYG{+w}{ }\PYG{n}{między}\PYG{+w}{ }\PYG{n}{u}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{n}{v}
+
+\PYG{+w}{    }\PYG{n}{dla}\PYG{+w}{ }\PYG{n}{każdego}\PYG{+w}{ }\PYG{n}{wierzchołka}\PYG{+w}{ }\PYG{n}{v}\PYG{+w}{ }\PYG{n}{w}\PYG{+w}{ }\PYG{n}{G}
+\PYG{+w}{        }\PYG{n}{zaktualizuj}\PYG{+w}{ }\PYG{n}{pozycję}\PYG{+w}{ }\PYG{n}{v}\PYG{+w}{ }\PYG{n}{na}\PYG{+w}{ }\PYG{n}{podstawie}\PYG{+w}{ }\PYG{n}{działającej}\PYG{+w}{ }\PYG{n}{siły}
+\PYG{+w}{        }\PYG{n}{zaktualizuj}\PYG{+w}{ }\PYG{n}{max\PYGZus{}sila}
+
+\PYG{+w}{    }\PYG{n}{t}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{t}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{1}
+
+\PYG{n}{end}\PYG{+w}{ }\PYG{k}{while}
+\end{MintedVerbatim}

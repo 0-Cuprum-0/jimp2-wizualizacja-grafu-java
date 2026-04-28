@@ -1,0 +1,6 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{n}{AB}\PYG{+w}{   }\PYG{l+m+mi}{1}\PYG{+w}{  }\PYG{l+m+mi}{2}\PYG{+w}{  }\PYG{l+m+mi}{1}
+\PYG{n}{BC}\PYG{+w}{   }\PYG{l+m+mi}{2}\PYG{+w}{  }\PYG{l+m+mi}{3}\PYG{+w}{  }\PYG{l+m+mi}{1}
+\PYG{n}{CD}\PYG{+w}{   }\PYG{l+m+mi}{3}\PYG{+w}{  }\PYG{l+m+mi}{4}\PYG{+w}{  }\PYG{l+m+mi}{1}
+\PYG{n}{DB}\PYG{+w}{   }\PYG{l+m+mi}{4}\PYG{+w}{  }\PYG{l+m+mi}{2}\PYG{+w}{  }\PYG{l+m+mf}{1.407}
+\end{MintedVerbatim}

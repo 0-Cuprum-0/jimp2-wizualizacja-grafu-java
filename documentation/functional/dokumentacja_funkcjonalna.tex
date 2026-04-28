@@ -1,0 +1,97 @@
+\documentclass[]{article}
+\usepackage{longtable}
+
+\input{preamble.tex}
+
+\colorlet{accent}{jimp}
+
+\title{Dokumentacja funkcjonalna - Graficzny interfejs użytkownika dla wizualizacji grafów w języku Java}
+\author{\authoricon Aleksander Jóźwik, Anastasiya Kryvetskaya}
+\date{\dateicon \today}
+
+\definecolor{zalety}{HTML}{a6d189}
+\definecolor{wady}{HTML}{e78284}
+
+\begin{document}
+	\noindent
+	\maketitle
+
+	\tableofcontents
+	\clearpage
+
+	\section{Cel projektu}
+	Celem projektu jest stworzenie graficznego interfejsu użytkownika w języku Java, który służy do przedstawienia resultatu wizualizacji grafu i 
+	daje możliwość podawać argumenty sterujące pracą algorytmów. Ten program bazuje się na gotowei implementacji matematycznych algorytmów 
+	dla przetważania danych użytkownika w konkretne pozycje elementów na przestrzeni. 
+	\section{Funkcjonalności programu}
+	Program oferuje następujące funkcjonalności:
+	\begin{enumerate}
+		\item Wybór trybu wpisywania lub wczytywania i jeden z dostępnych formatów takich plików.
+		\item Wybór algorytmu który będzie opracowal dane.
+		\item Możliwość kontroli sposobu działania programu za pomocą wpisywania argumentów do algorytmów.
+		\item Zapisywanie informacji o położeniu wierzchołków po ich rozmieszczeniu do pliku tekstowego lub binarnego.
+		\item Graficzne przedstawienie elementów grafu: wieszchołki, krawędzi, wagi, etykiety.
+		\item Możliwość poruszania się po przestrzeni na której znjduje się graf oraz skalowanie tego widoku. ?
+		\item Kontrola nad graficznym przedstawieniem : zmiana koloru, ukrycie poszczególnych elementów.
+		\item Pokazywanie aktualnego statusu działania programu: logi oraz błędy.
+	\end{enumerate}
+	\clearpage
+	
+	\section{Graficzny interfejs i jego elementy}
+	
+    \begin{center}
+	\begin{figure}[H]
+    \centering
+        \includegraphics[width=1\textwidth]{./assets/interface.jpg}
+    \caption{Graficzny interfejs}
+    \label{fig:diagram_podzialu}
+	\end{figure}
+    \end{center}
+
+	\clearpage
+	\subsection{Górny pas menu - Opcje ogółne}
+	\begin{figure}[H]
+    \includegraphics[width=0.8\textwidth]{./assets/part1.png}
+    \caption{ Opcje ogółne}
+    \label{fig:Górny pas menu}
+	\end{figure}
+	\clearpage
+
+	\subsection{Lewa część - Główne opcje wizualizacji}
+	\begin{figure}[H]
+    \includegraphics[width=0.8\textwidth]{./assets/part2_0.png}
+    \caption{Główne opcje wizualizacji}
+    \label{fig:Górny pas menu}
+	\end{figure}
+	\clearpage
+
+		\subsubsection{Góra - Ustawienia algorytmu}
+		\begin{figure}[H]
+    \includegraphics[width=0.8\textwidth]{./assets/part2_1.png}
+    \caption{Ustawienia algorytmu}
+    \label{fig:Górny pas menu}
+	\end{figure}
+	\clearpage
+
+		\subsubsection{Góra - Ustawienia widoku}
+		\begin{figure}[H]
+    \includegraphics[width=0.8\textwidth]{./assets/part2_2.png}
+    \caption{Ustawienia widoku}
+    \label{fig:Górny pas menu}
+	\end{figure}
+	\clearpage
+
+
+	\subsection{Dolny pas menu - Status wykonania}
+	\begin{figure}[H]
+    \includegraphics[width=0.8\textwidth]{./assets/part3.png}
+    \caption{Status wykonania}
+    \label{fig:Górny pas menu}
+	\end{figure}
+	\clearpage
+	
+
+	
+
+
+\end{document}
