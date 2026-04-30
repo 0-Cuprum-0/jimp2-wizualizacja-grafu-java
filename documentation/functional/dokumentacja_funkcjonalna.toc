@@ -7,7 +7,5 @@
 \contentsline {subsubsection}{\numberline {3.1.2}Zakładka Widok}{5}{subsubsection.3.1.2}%
 \contentsline {subsubsection}{\numberline {3.1.3}Zakładka O programie}{5}{subsubsection.3.1.3}%
 \contentsline {subsection}{\numberline {3.2}Lewa część - Główne opcje wizualizacji}{6}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Góra - Ustawienia algorytmu}{7}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}Góra - Ustawienia widoku}{8}{subsubsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.3}Dolny pas menu - Status wykonania}{9}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Format danych wejściowych}{10}{section.4}%
+\contentsline {subsection}{\numberline {3.3}Dolny pas menu - Status wykonania}{7}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Format danych wejściowych}{7}{section.4}%
