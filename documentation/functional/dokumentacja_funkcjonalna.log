@@ -1,5 +1,5 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2026/dev/Arch Linux)  (format=lualatex 2026.1.11)  28 APR 2026 21:57
- restricted system commands enabled.
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2026/dev/Arch Linux)  (format=lualatex 2026.1.18)  30 APR 2026 11:14
+ system commands enabled.
  file:line:error style messages enabled.
 **"/home/aleksander/Development/Java/JIMP 2/jimp2-wizualizacja-grafu-java/documentation/functional/dokumentacja_funkcjonalna"
 ("/home/aleksander/Development/Java/JIMP 2/jimp2-wizualizacja-grafu-java/documentation/functional/dokumentacja_funkcjonalna.tex"
@@ -705,7 +705,7 @@ Package: pgfopts 2014/07/10 v2.1a LaTeX package options with pgfkeys
 \pgfopts@list@add@b@toks=\toks47
 ) (/usr/share/texmf-dist/tex/latex/tools/shellesc.sty
 Package: shellesc 2023/07/08 v1.0d unified shell escape interface for LaTeX
-Package shellesc Info: Restricted shell escape enabled on input line 77.
+Package shellesc Info: Unrestricted shell escape enabled on input line 75.
 )
 \c@minted@FancyVerbLineTemp=\count366
 \@float@every@listing=\toks48
@@ -1109,9 +1109,6 @@ LaTeX Warning: Label `fig:Górny pas menu' multiply defined.
 
 LaTeX Warning: Label `fig:Górny pas menu' multiply defined.
 
-
-LaTeX Warning: Label `fig:Górny pas menu' multiply defined.
-
 )
 \openout1 = dokumentacja_funkcjonalna.aux
 
@@ -1288,64 +1285,75 @@ set lang polish, 2
 [2
 
 ]
-<./assets/interface.jpg, id=104, 1445.4pt x 813.0375pt>
-File: ./assets/interface.jpg Graphic file (type jpg)
-<use ./assets/interface.jpg>
-Package luatex.def Info: ./assets/interface.jpg  used on input line 47.
-(luatex.def)             Requested size: 455.24411pt x 256.07095pt.
+<assets/main.png, id=124, 1928.20375pt x 1106.1325pt>
+File: assets/main.png Graphic file (type png)
+<use assets/main.png>
+Package luatex.def Info: assets/main.png  used on input line 47.
+(luatex.def)             Requested size: 455.24411pt x 261.1564pt.
 
 
 [3
 
-<./assets/interface.jpg>]
-<./assets/part1.png, id=110, 642.4pt x 642.4pt>
-File: ./assets/part1.png Graphic file (type png)
-<use ./assets/part1.png>
-Package luatex.def Info: ./assets/part1.png  used on input line 56.
-(luatex.def)             Requested size: 364.19667pt x 364.20155pt.
+<./assets/main.png>]
+<assets/file_menu.png, id=131, 1928.20375pt x 1106.1325pt>
+File: assets/file_menu.png Graphic file (type png)
+<use assets/file_menu.png>
+Package luatex.def Info: assets/file_menu.png  used on input line 74.
+(luatex.def)             Requested size: 364.19667pt x 208.91837pt.
+<assets/view_menu.png, id=132, 1928.20375pt x 1106.1325pt>
+File: assets/view_menu.png Graphic file (type png)
+<use assets/view_menu.png>
+Package luatex.def Info: assets/view_menu.png  used on input line 82.
+(luatex.def)             Requested size: 364.19667pt x 208.91837pt.
 
 
 [4
 
-<./assets/part1.png>]
-<./assets/part2_0.png, id=117, 738.76pt x 1121.18875pt>
+<./assets/file_menu.png>]
+<assets/about.png, id=139, 953.5625pt x 815.045pt>
+File: assets/about.png Graphic file (type png)
+<use assets/about.png>
+Package luatex.def Info: assets/about.png  used on input line 92.
+(luatex.def)             Requested size: 227.62206pt x 194.55768pt.
+
+
+[5<./assets/view_menu.png><./assets/about.png>]
+<./assets/part2_0.png, id=148, 738.76pt x 1121.18875pt>
 File: ./assets/part2_0.png Graphic file (type png)
 <use ./assets/part2_0.png>
-Package luatex.def Info: ./assets/part2_0.png  used on input line 64.
+Package luatex.def Info: ./assets/part2_0.png  used on input line 101.
 (luatex.def)             Requested size: 364.19667pt x 552.72334pt.
 
 
-[5
-
-<./assets/part2_0.png>]
-<./assets/part2_1.png, id=124, 566.115pt x 575.14874pt>
+[6<./assets/part2_0.png>]
+<./assets/part2_1.png, id=155, 566.115pt x 575.14874pt>
 File: ./assets/part2_1.png Graphic file (type png)
 <use ./assets/part2_1.png>
-Package luatex.def Info: ./assets/part2_1.png  used on input line 72.
+Package luatex.def Info: ./assets/part2_1.png  used on input line 109.
 (luatex.def)             Requested size: 364.19667pt x 370.0159pt.
-
-
-[6
-
-<./assets/part2_1.png>]
-<./assets/part2_2.png, id=131, 722.7pt x 855.195pt>
-File: ./assets/part2_2.png Graphic file (type png)
-<use ./assets/part2_2.png>
-Package luatex.def Info: ./assets/part2_2.png  used on input line 80.
-(luatex.def)             Requested size: 364.19667pt x 430.96315pt.
 
 
 [7
 
-<./assets/part2_2.png>]
-<./assets/part3.png, id=138, 566.115pt x 768.8725pt>
-File: ./assets/part3.png Graphic file (type png)
-<use ./assets/part3.png>
-Package luatex.def Info: ./assets/part3.png  used on input line 88.
-(luatex.def)             Requested size: 364.19667pt x 494.64604pt.
+<./assets/part2_1.png>]
+<./assets/part2_2.png, id=162, 722.7pt x 855.195pt>
+File: ./assets/part2_2.png Graphic file (type png)
+<use ./assets/part2_2.png>
+Package luatex.def Info: ./assets/part2_2.png  used on input line 117.
+(luatex.def)             Requested size: 364.19667pt x 430.96315pt.
 
 
 [8
+
+<./assets/part2_2.png>]
+<./assets/part3.png, id=170, 566.115pt x 768.8725pt>
+File: ./assets/part3.png Graphic file (type png)
+<use ./assets/part3.png>
+Package luatex.def Info: ./assets/part3.png  used on input line 125.
+(luatex.def)             Requested size: 364.19667pt x 494.64604pt.
+
+
+[9
 
 <./assets/part3.png>]
 \g__tcobox_out_iow=\write8
@@ -1354,14 +1362,10 @@ Package luatex.def Info: ./assets/part3.png  used on input line 88.
 \pydata@fh@_274698AB6A750DA52E951A6DC4043AEB.data.minted=\write9
 
 \openout9 = _274698AB6A750DA52E951A6DC4043AEB.data.minted
-runsystem(latexminted config  --timestamp 20260428215734 274698AB6A750DA52E951A6DC4043AEB)...executed.
+runsystem(latexminted config  --timestamp 20260430111427 274698AB6A750DA52E951A6DC4043AEB)...executed.
  (./_274698AB6A750DA52E951A6DC4043AEB.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20260428215734 274698AB6A750DA52E951A6DC4043AEB)...executed.
- (./_minted/default.style.minted)
-\openout9 = _274698AB6A750DA52E951A6DC4043AEB.data.minted
-
-runsystem(latexminted highlight  --timestamp 20260428215734 274698AB6A750DA52E951A6DC4043AEB)...executed.
- (./_minted/B07E95632540C8E8A15D3CDF489E95BE.highlight.minted
+runsystem(latexminted cleanconfig  --timestamp 20260430111427 274698AB6A750DA52E951A6DC4043AEB)...executed.
+ (./_minted/default.style.minted) (./_minted/B07E95632540C8E8A15D3CDF489E95BE.highlight.minted
 
 Package fontspec Info: 
 (fontspec)             Font family 'IosevkaNerdFont(1)' created for font
@@ -1383,19 +1387,11 @@ Package fontspec Info:
 
 )
 \openout8 = dokumentacja_funkcjonalna.listing
-
-\openout9 = _274698AB6A750DA52E951A6DC4043AEB.data.minted
-
-runsystem(latexminted highlight  --timestamp 20260428215734 274698AB6A750DA52E951A6DC4043AEB)...executed.
  (./_minted/DB732BFC3116747D57AC21D2B5C800C9.highlight.minted)
 
-[9
+[10
 
-]
-\openout9 = _274698AB6A750DA52E951A6DC4043AEB.data.minted
-
-runsystem(latexminted clean  --timestamp 20260428215734 274698AB6A750DA52E951A6DC4043AEB)...executed.
- (./dokumentacja_funkcjonalna.aux)
+] (./dokumentacja_funkcjonalna.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1404,33 +1400,27 @@ L3 programming layer <2025-01-18>
 
 LaTeX Warning: There were multiply-defined labels.
 
-
-Package rerunfilecheck Warning: File `dokumentacja_funkcjonalna.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `dokumentacja_funkcjonalna.out':
-(rerunfilecheck)             Before: 6A33345809D3FA1D23374547FF5D905F;1668
-(rerunfilecheck)             After:  95CAB2E8B0F46D2632883303941315CD;1845.
+Package rerunfilecheck Info: File `dokumentacja_funkcjonalna.out' has not changed.
+(rerunfilecheck)             Checksum: 4D01D9EE89AA19522F39CB00CACD26F6;2179.
 Package logreq Info: Writing requests to 'dokumentacja_funkcjonalna.run.xml'.
 
 \openout1 = dokumentacja_funkcjonalna.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 43548 strings out of 475506
+ 43580 strings out of 475506
  100000,2373549 words of node,token memory allocated
- 1379 words of node memory still in use:
-   30 hlist, 2 vlist, 14 rule, 2 glue, 4 kern, 1 glyph, 83 attribute, 72 glue_spec, 79 attribute_list, 2 write, 24 pdf_literal, 24 pdf_colorstack nodes
-   avail lists: 1:2,2:1280,3:441,4:212,5:129,6:53,7:3362,8:2,9:365,10:7,11:480
- 65557 multiletter control sequences out of 65536+600000
- 88 fonts using 377761343 bytes
+ 1397 words of node memory still in use:
+   30 hlist, 2 vlist, 14 rule, 3 glue, 4 kern, 1 glyph, 85 attribute, 73 glue_spec, 80 attribute_list, 2 write, 24 pdf_literal, 24 pdf_colorstack nodes
+   avail lists: 1:2,2:1422,3:574,4:212,5:175,6:69,7:3361,8:2,9:452,10:7,11:480
+ 65583 multiletter control sequences out of 65536+600000
+ 88 fonts using 377662783 bytes
  103i,7n,105p,1311b,1796s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/fonts/Iosevka/IosevkaNerdFont-Regular.ttf></usr/share/fonts/TTF/ArimoNerdFont-Bold.ttf></usr/share/fonts/TTF/ArimoNerdFont-Regular.ttf>
-Output written on dokumentacja_funkcjonalna.pdf (9 pages, 3816748 bytes).
+</home/aleksander/.fonts/Iosevka/IosevkaNerdFont-Regular.ttf></usr/share/fonts/TTF/ArimoNerdFont-Bold.ttf></usr/share/fonts/TTF/ArimoNerdFont-Regular.ttf>
+Output written on dokumentacja_funkcjonalna.pdf (10 pages, 3350156 bytes).
 
-PDF statistics: 182 PDF objects out of 1000 (max. 8388607)
- 120 compressed objects within 2 object streams
- 34 named destinations out of 1000 (max. 131072)
- 320 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 212 PDF objects out of 1000 (max. 8388607)
+ 144 compressed objects within 2 object streams
+ 40 named destinations out of 1000 (max. 131072)
+ 352 words of extra memory for PDF output out of 10000 (max. 100000000)
 
