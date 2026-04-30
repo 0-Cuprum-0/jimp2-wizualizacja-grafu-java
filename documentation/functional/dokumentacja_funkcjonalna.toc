@@ -9,3 +9,4 @@
 \contentsline {subsection}{\numberline {3.2}Lewa część - Główne opcje wizualizacji}{6}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Dolny pas menu - Status wykonania}{7}{subsection.3.3}%
 \contentsline {section}{\numberline {4}Format danych wejściowych}{7}{section.4}%
+\contentsline {section}{\numberline {5}Komunikaty błędów}{8}{section.5}%
