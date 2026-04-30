@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2026/dev/Arch Linux)  (format=lualatex 2026.1.18)  30 APR 2026 13:55
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2026/dev/Arch Linux)  (format=lualatex 2026.1.18)  30 APR 2026 14:00
  system commands enabled.
  file:line:error style messages enabled.
 **"/home/aleksander/Development/Java/JIMP 2/jimp2-wizualizacja-grafu-java/documentation/functional/dokumentacja_funkcjonalna"
@@ -1325,94 +1325,17 @@ Package luatex.def Info: ./assets/Algorithm_Dropdown.png  used on input line 112
 
 
 [6<./assets/menu_wizualizacji.png><./assets/Algorithm_Dropdown.png>]
-
-LaTeX Warning: Reference `komunikaty_bledow' on page 7 undefined on input line 124.
-
-<./assets/blad.jpg, id=153, 964.60374pt x 62.2325pt>
+<./assets/blad.jpg, id=154, 964.60374pt x 62.2325pt>
 File: ./assets/blad.jpg Graphic file (type jpg)
 <use ./assets/blad.jpg>
 Package luatex.def Info: ./assets/blad.jpg  used on input line 127.
 (luatex.def)             Requested size: 364.19667pt x 23.49666pt.
-<./assets/okno_blad.png, id=154, 1159.33125pt x 556.0775pt>
+<./assets/okno_blad.png, id=155, 1159.33125pt x 556.0775pt>
 File: ./assets/okno_blad.png Graphic file (type png)
 <use ./assets/okno_blad.png>
 Package luatex.def Info: ./assets/okno_blad.png  used on input line 133.
 (luatex.def)             Requested size: 364.19667pt x 174.69017pt.
-<./assets/sukces.jpg, id=155, 1201.48875pt x 61.22874pt>
+<./assets/sukces.jpg, id=156, 1201.48875pt x 61.22874pt>
 File: ./assets/sukces.jpg Graphic file (type jpg)
 <use ./assets/sukces.jpg>
-Package luatex.def Info: ./assets/sukces.jpg  used on input line 139.
-(luatex.def)             Requested size: 364.19667pt x 18.55934pt.
-\g__tcobox_out_iow=\write8
-
-\openout8 = dokumentacja_funkcjonalna.listing
-\pydata@fh@_274698AB6A750DA52E951A6DC4043AEB.data.minted=\write9
-
-\openout9 = _274698AB6A750DA52E951A6DC4043AEB.data.minted
-runsystem(latexminted config  --timestamp 20260430135551 274698AB6A750DA52E951A6DC4043AEB)...executed.
-(./_274698AB6A750DA52E951A6DC4043AEB.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20260430135551 274698AB6A750DA52E951A6DC4043AEB)...executed.
- (./_minted/default.style.minted) (./_minted/B07E95632540C8E8A15D3CDF489E95BE.highlight.minted
-
-Package fontspec Info: 
-(fontspec)             Font family 'IosevkaNerdFont(1)' created for font
-(fontspec)             'Iosevka Nerd Font' with options
-(fontspec)             [Renderer=Harfbuzz,WordSpace={1,0,0},HyphenChar=None,PunctuationSpace=WordSpace,Language=Polish].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.: <->"name:Iosevka Nerd
-(fontspec)             Font:mode=harf;script=latn;language=PLK;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.: <->"name:Iosevka Nerd
-(fontspec)             Font/B:mode=harf;script=latn;language=PLK;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.: <->"name:Iosevka
-(fontspec)             Nerd Font/I:mode=harf;script=latn;language=PLK;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->"name:Iosevka Nerd
-(fontspec)             Font/BI:mode=harf;script=latn;language=PLK;"
-
-)
-\openout8 = dokumentacja_funkcjonalna.listing
- (./_minted/DB732BFC3116747D57AC21D2B5C800C9.highlight.minted)
-
-[7
-
-<./assets/blad.jpg><./assets/okno_blad.png><./assets/sukces.jpg>]
-
-[8] (./dokumentacja_funkcjonalna.aux)
- ***********
-LaTeX2e <2024-11-01> patch level 2
-L3 programming layer <2025-01-18>
- ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package rerunfilecheck Info: File `dokumentacja_funkcjonalna.out' has not changed.
-(rerunfilecheck)             Checksum: 0C1FCD8ED7858D7710FFA9E773719B2D;1905.
-Package logreq Info: Writing requests to 'dokumentacja_funkcjonalna.run.xml'.
-
-\openout1 = dokumentacja_funkcjonalna.run.xml
-)
-
-Here is how much of LuaTeX's memory you used:
- 43595 strings out of 475506
- 100000,2373549 words of node,token memory allocated
- 1410 words of node memory still in use:
-   30 hlist, 2 vlist, 14 rule, 3 glue, 4 kern, 2 glyph, 87 attribute, 73 glue_spec, 81 attribute_list, 2 write, 24 pdf_literal, 24 pdf_colorstack nodes
-   avail lists: 1:2,2:2309,3:753,4:260,5:154,6:65,7:3360,8:2,9:467,10:7,11:480
- 65597 multiletter control sequences out of 65536+600000
- 90 fonts using 400276879 bytes
- 103i,9n,105p,1311b,1796s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</home/aleksander/.fonts/Iosevka/IosevkaNerdFont-Regular.ttf></usr/share/fonts/TTF/ArimoNerdFont-Bold.ttf></usr/share/fonts/TTF/ArimoNerdFont-Regular.ttf>
-Output written on dokumentacja_funkcjonalna.pdf (8 pages, 369340 bytes).
-
-PDF statistics: 200 PDF objects out of 1000 (max. 8388607)
- 134 compressed objects within 2 object streams
- 38 named destinations out of 1000 (max. 131072)
- 344 words of extra memory for PDF output out of 10000 (max. 100000000)
-
+Pac
