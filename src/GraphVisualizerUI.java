@@ -12,6 +12,8 @@ public class GraphVisualizerUI extends JFrame {
         setSize(900,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+        ImageIcon logo = new ImageIcon("./images/graph_logo.png");
+        setIconImage(logo.getImage());
 
         setJMenuBar(createMenuBar());
 
@@ -54,26 +56,48 @@ public class GraphVisualizerUI extends JFrame {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(BG_COLOR);
         panel.setBorder(new EmptyBorder(15, 15, 15, 15));
-
         addSectionTitle(panel, "Parametry");
-        addFormRow(panel, "Algorytm:", new JComboBox<>(new String[]{"Fruchterman-Reingold", "Triangulacja"}));
+        addPlainText(panel, "Algorytm");
 
 
-        panel.add(Box.createVerticalStrut(20));
+//        addFormRow(panel, "Algorytm:", new JComboBox<>(new String[]{"Fruchterman-Reingold", "Triangulacja"}));
+        JComboBox algorythmsChoise = new JComboBox(new String[]{"Fruchterman-Reingold", "Triangulacja"});
+        algorythmsChoise.setAlignmentX(Component.CENTER_ALIGNMENT);
+        algorythmsChoise.setMaximumSize(
+                new Dimension(Integer.MAX_VALUE, algorythmsChoise.getPreferredSize().height)
+        );
+
+
+        //panel.add(Box.createVerticalStrut(20));
 
         JButton runBtn = new JButton("URUCHOM");
         runBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JButton fullBtn = new JButton("Pokaż w pełnym ekranie");
+        fullBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        panel.add(algorythmsChoise);
+        panel.add(Box.createVerticalGlue());
+        panel.add(fullBtn);
         panel.add(runBtn);
 
         return panel;
     }
+    private void addPlainText(JPanel parent, String text){
+        JLabel label = new JLabel(text);
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        label.setForeground(FG_COLOR);
+        label.setFont(new Font("SansSerif", Font.BOLD, 13));
 
+        parent.add(label);
+
+    }
     private void addSectionTitle(JPanel parent, String text) {
         JLabel label = new JLabel(text);
         label.setForeground(FG_COLOR);
         label.setFont(new Font("SansSerif", Font.BOLD, 16));
         label.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, FG_COLOR)); // Podkreślenie
-        label.setAlignmentX(Component.LEFT_ALIGNMENT);
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
         parent.add(label);
         parent.add(Box.createVerticalStrut(10));
     }
@@ -90,5 +114,6 @@ public class GraphVisualizerUI extends JFrame {
 
         parent.add(row);
         parent.add(Box.createVerticalStrut(5));
+
     }
 }
