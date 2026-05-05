@@ -8,34 +8,61 @@ public class GraphVisualizerUI extends JFrame {
     private final Color ACCENT_COLOR = new Color(203, 166, 247);
 
     public GraphVisualizerUI() {
+        //Setting up the frame
+        initFrame();
+
+        setJMenuBar(createMenuBar());
+
+        /* Podział na części i add() */
+        initLayout();
+
+    }
+
+    private void initFrame (){
         setTitle("Wizualizator grafów");
         setSize(900,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         ImageIcon logo = new ImageIcon("./images/graph_logo.png");
         setIconImage(logo.getImage());
-
-        setJMenuBar(createMenuBar());
+    }
+    private void initLayout(){
 
         JPanel sidebar = createSideBar();
+        JLabel statusBar = createStatusBar();
+        JPanel canvas = createCanvas();
 
-        JPanel canvas = new JPanel();
-        canvas.setBackground(BG_COLOR);
-        canvas.setBorder(new EmptyBorder(15, 15, 15, 15));
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,sidebar,canvas);
         splitPane.setDividerLocation(250);
         splitPane.setDividerSize(3);
         splitPane.setBorder(null);
+
+        //Wszystkie add
         add(splitPane,BorderLayout.CENTER);
 
+        add(statusBar, BorderLayout.SOUTH);
+    }
+    private void createCheckWithLabel(){
+        ; //not void
+    }
+
+    private JPanel createCanvas(){
+
+        JPanel canvas = new JPanel();
+        canvas.setBackground(BG_COLOR);
+        canvas.setBorder(new EmptyBorder(15, 15, 15, 15));
+        return canvas;
+
+    }
+    private JLabel createStatusBar(){
         JLabel statusBar = new JLabel(" Info: Wczytano plik \"graf.txt\"");
         statusBar.setForeground(FG_COLOR);
         statusBar.setOpaque(true);
         statusBar.setBackground(new Color(20, 20, 30));
         statusBar.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.GRAY));
         statusBar.setPreferredSize(new Dimension(getWidth(), 25));
-        add(statusBar, BorderLayout.SOUTH);
+        return statusBar;
     }
 
     private JMenuBar createMenuBar() {
@@ -80,6 +107,11 @@ public class GraphVisualizerUI extends JFrame {
         panel.add(Box.createVerticalGlue());
         panel.add(fullBtn);
         panel.add(runBtn);
+
+        Dimension size = fullBtn.getPreferredSize();
+
+        runBtn.setMaximumSize(size);
+        fullBtn.setMaximumSize(size);
 
         return panel;
     }
