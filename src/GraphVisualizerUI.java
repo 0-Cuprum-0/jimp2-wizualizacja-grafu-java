@@ -33,6 +33,7 @@ public class GraphVisualizerUI extends JFrame {
         JPanel canvas = createCanvas();
 
 
+
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,sidebar,canvas);
         splitPane.setDividerLocation(250);
         splitPane.setDividerSize(3);
@@ -43,8 +44,30 @@ public class GraphVisualizerUI extends JFrame {
 
         add(statusBar, BorderLayout.SOUTH);
     }
-    private void createCheckWithLabel(){
-        ; //not void
+    private JPanel createRowWithLabel(String string, JComponent element){
+        //JCheckBox checkBox = new JCheckBox(label, selected);
+        JPanel row = new JPanel();
+        JLabel label = new JLabel(string);
+        //label.setAlignmentX(Component.LEFT_ALIGNMENT);
+        row.setLayout(new GridLayout(1,2));
+
+        element.setBackground(BG_COLOR);
+        element.setOpaque(true);
+        element.setForeground(FG_COLOR);
+
+        //element.setFocusPainted( false );
+
+
+        //checkBox.setHorizontalTextPosition(SwingConstants.LEFT);
+        //checkBox.setIconTextGap(70);
+
+
+    row.add(label);
+    row.add(element);
+
+
+    return row;
+        //return checkBox;
     }
 
     private JPanel createCanvas(){
@@ -100,12 +123,22 @@ public class GraphVisualizerUI extends JFrame {
         JButton runBtn = new JButton("URUCHOM");
         runBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+
+       // wagi.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         JButton fullBtn = new JButton("Pokaż w pełnym ekranie");
         fullBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        panel.add(Box.createVerticalStrut(10));
         panel.add(algorythmsChoise);
+        panel.add(Box.createVerticalStrut(10));
+        panel.add(createRowWithLabel("Pokaż wagi", new JCheckBox()));
+        panel.add(Box.createVerticalStrut(10));
         panel.add(Box.createVerticalGlue());
+
+
         panel.add(fullBtn);
+        panel.add(Box.createVerticalStrut(10));
         panel.add(runBtn);
 
         Dimension size = fullBtn.getPreferredSize();
@@ -134,18 +167,5 @@ public class GraphVisualizerUI extends JFrame {
         parent.add(Box.createVerticalStrut(10));
     }
 
-    private void addFormRow(JPanel parent, String labelText, JComponent inputComp) {
-        JPanel row = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 2));
-        row.setBackground(BG_COLOR);
-        row.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JLabel label = new JLabel(labelText);
-        label.setForeground(FG_COLOR);
-        row.add(label);
-        row.add(inputComp);
-
-        parent.add(row);
-        parent.add(Box.createVerticalStrut(5));
-
-    }
 }
