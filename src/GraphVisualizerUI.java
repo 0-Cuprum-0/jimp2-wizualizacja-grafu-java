@@ -3,169 +3,33 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class GraphVisualizerUI extends JFrame {
-    private final Color BG_COLOR = new Color(17, 17, 27);
-    private final Color FG_COLOR = new Color(205, 214, 244);
-    private final Color ACCENT_COLOR = new Color(203, 166, 247);
 
     public GraphVisualizerUI() {
-        //Setting up the frame
         initFrame();
-
-        setJMenuBar(createMenuBar());
-
-        /* Podział na części i add() */
+        setJMenuBar(new TopMenuBar());
         initLayout();
-
     }
 
-    private void initFrame (){
+    private void initFrame() {
         setTitle("Wizualizator grafów");
-        setSize(900,600);
+        setSize(900, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         ImageIcon logo = new ImageIcon("./images/graph_logo.png");
         setIconImage(logo.getImage());
     }
-    private void initLayout(){
 
-        JPanel sidebar = createSideBar();
-        JLabel statusBar = createStatusBar();
-        JPanel canvas = createCanvas();
+    private void initLayout() {
+        JPanel sidebar = new SidebarPanel();
+        JLabel statusBar = new StatusBar();
+        JPanel canvas = new GraphCanvas();
 
-
-
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,sidebar,canvas);
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sidebar, canvas);
         splitPane.setDividerLocation(250);
         splitPane.setDividerSize(3);
         splitPane.setBorder(null);
 
-        //Wszystkie add
-        add(splitPane,BorderLayout.CENTER);
-
+        add(splitPane, BorderLayout.CENTER);
         add(statusBar, BorderLayout.SOUTH);
     }
-    private JPanel createRowWithLabel(String string, JComponent element){
-        //JCheckBox checkBox = new JCheckBox(label, selected);
-        JPanel row = new JPanel();
-        JLabel label = new JLabel(string);
-        //label.setAlignmentX(Component.LEFT_ALIGNMENT);
-        row.setLayout(new GridLayout(1,2));
-
-        element.setBackground(BG_COLOR);
-        element.setOpaque(true);
-        element.setForeground(FG_COLOR);
-
-        //element.setFocusPainted( false );
-
-
-        //checkBox.setHorizontalTextPosition(SwingConstants.LEFT);
-        //checkBox.setIconTextGap(70);
-
-
-    row.add(label);
-    row.add(element);
-
-
-    return row;
-        //return checkBox;
-    }
-
-    private JPanel createCanvas(){
-
-        JPanel canvas = new JPanel();
-        canvas.setBackground(BG_COLOR);
-        canvas.setBorder(new EmptyBorder(15, 15, 15, 15));
-        return canvas;
-
-    }
-    private JLabel createStatusBar(){
-        JLabel statusBar = new JLabel(" Info: Wczytano plik \"graf.txt\"");
-        statusBar.setForeground(FG_COLOR);
-        statusBar.setOpaque(true);
-        statusBar.setBackground(new Color(20, 20, 30));
-        statusBar.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.GRAY));
-        statusBar.setPreferredSize(new Dimension(getWidth(), 25));
-        return statusBar;
-    }
-
-    private JMenuBar createMenuBar() {
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.setBackground(BG_COLOR);
-
-        String[] menus = {"Plik", "Widok", "Opcje", "Pomoc"};
-        for (String title : menus) {
-            JMenu menu = new JMenu(title);
-            menu.setForeground(FG_COLOR);
-            menuBar.add(menu);
-        }
-        return menuBar;
-    }
-
-    private JPanel createSideBar() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(BG_COLOR);
-        panel.setBorder(new EmptyBorder(15, 15, 15, 15));
-        addSectionTitle(panel, "Parametry");
-        addPlainText(panel, "Algorytm");
-
-
-//        addFormRow(panel, "Algorytm:", new JComboBox<>(new String[]{"Fruchterman-Reingold", "Triangulacja"}));
-        JComboBox algorythmsChoise = new JComboBox(new String[]{"Fruchterman-Reingold", "Triangulacja"});
-        algorythmsChoise.setAlignmentX(Component.CENTER_ALIGNMENT);
-        algorythmsChoise.setMaximumSize(
-                new Dimension(Integer.MAX_VALUE, algorythmsChoise.getPreferredSize().height)
-        );
-
-
-        //panel.add(Box.createVerticalStrut(20));
-
-        JButton runBtn = new JButton("URUCHOM");
-        runBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-
-       // wagi.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JButton fullBtn = new JButton("Pokaż w pełnym ekranie");
-        fullBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        panel.add(Box.createVerticalStrut(10));
-        panel.add(algorythmsChoise);
-        panel.add(Box.createVerticalStrut(10));
-        panel.add(createRowWithLabel("Pokaż wagi", new JCheckBox()));
-        panel.add(Box.createVerticalStrut(10));
-        panel.add(Box.createVerticalGlue());
-
-
-        panel.add(fullBtn);
-        panel.add(Box.createVerticalStrut(10));
-        panel.add(runBtn);
-
-        Dimension size = fullBtn.getPreferredSize();
-
-        runBtn.setMaximumSize(size);
-        fullBtn.setMaximumSize(size);
-
-        return panel;
-    }
-    private void addPlainText(JPanel parent, String text){
-        JLabel label = new JLabel(text);
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        label.setForeground(FG_COLOR);
-        label.setFont(new Font("SansSerif", Font.BOLD, 13));
-
-        parent.add(label);
-
-    }
-    private void addSectionTitle(JPanel parent, String text) {
-        JLabel label = new JLabel(text);
-        label.setForeground(FG_COLOR);
-        label.setFont(new Font("SansSerif", Font.BOLD, 16));
-        label.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, FG_COLOR)); // Podkreślenie
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        parent.add(label);
-        parent.add(Box.createVerticalStrut(10));
-    }
-
-
 }
