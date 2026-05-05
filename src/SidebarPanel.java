@@ -87,14 +87,14 @@ public class SidebarPanel extends JPanel {
         JLabel label = new JLabel(text);
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         label.setForeground(AppTheme.FG_COLOR);
-        label.setFont(new Font("SansSerif", Font.BOLD, 13));
+        label.setFont(AppTheme.SECTION_FONT);
         add(label);
     }
 
     private void addSectionTitle(String text) {
         JLabel label = new JLabel(text);
         label.setForeground(AppTheme.FG_COLOR);
-        label.setFont(new Font("SansSerif", Font.BOLD, 16));
+        label.setFont(AppTheme.SECTION_FONT);
         label.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, AppTheme.FG_COLOR)); 
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         add(label);

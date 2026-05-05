@@ -9,8 +9,8 @@ public class StatusBar extends JLabel{
         super(" Info: Wczytano plik \"graf.txt\"");
         setForeground(AppTheme.FG_COLOR);
         setOpaque(true);
-        setBackground(new Color(20, 20, 30));
-        setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.GRAY));
+        setBackground(AppTheme.BG_COLOR);
+        setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, AppTheme.FG_COLOR));
         setPreferredSize(new Dimension(getWidth(), 25));
     }
 }
