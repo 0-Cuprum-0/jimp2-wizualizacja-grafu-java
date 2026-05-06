@@ -8,3 +8,6 @@ public class Main {
         });
     }
 }
+
+//GraphVisualizerUI.setLookAndFeel(GraphVisualizerUI.getCrossPlatformLookAndFeelClassName());
+//why not try this,huh?
