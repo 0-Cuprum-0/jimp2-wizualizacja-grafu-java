@@ -29,6 +29,25 @@
     \end{itemize}
     \section{Klasa AppTheme}
     Odpowiada za zdefiniowanie palety kolorów i czcionek.
-    \section{Klasa TopMenu}
-
+    \section{Klasa TopMenuBar}
+    Odpowiada za górny pasek menu. Posiada dwie funkcje prywatne:
+    \begin{itemize}
+        \item createStyledMenu - tworzy nowy menu zgodnie z paletą kolorów.
+        \item createStyledMenuItem - tworzy nowy element menu zgodnie z paletą kolorów.
+    \end{itemize}
+    \section{Klasa SidebarPanel}
+    Odpowiada za boczny panel pozwalający na konfiguracje parametrów programu i uruchomienie wizualizacji.
+    \begin{itemize}
+        \item buildUI - tworzy elementy UI w bocznym panelu.
+        \item createColorSwatch - tworzy przycisk odpowiadający za zmianę koloru.
+        \item addPlainText - służy do tworzenia zwykłego tekstu.
+        \item addSectionText - służy do tworzenia tekstu nagłówkowego.
+        \item createRowWithLabel - tworzy panel, w którym umieszcza etykietę i element podany jako argument.
+    \end{itemize}
+    \section{Klasa StatusBar}
+    Odpowiada za dolny pasek stanu.
+    \section{Klasa GraphCanvas}
+    Odpowiada za płótno na którym wyświetalana jest wizualizacja.
+    \section{Klasa AboutWindow}
+    Odpowiada za okno "O Programie".
 \end{document}

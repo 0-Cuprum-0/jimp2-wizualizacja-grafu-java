@@ -44,7 +44,7 @@ public class AboutWindow extends JFrame {
         centerThisText(textLabel);
         add(textLabel);
 
-        JLabel authors = new JLabel("<html><b>Autorzy:</b>Aleksander Józwik, Anastasiya Kryvetskaya</html>");
+        JLabel authors = new JLabel("<html><b>Autorzy:</b>Anastasiya Kryvetskaya, Aleksander Jóźwik</html>");
         centerThisText(authors);
         add(authors);
 
