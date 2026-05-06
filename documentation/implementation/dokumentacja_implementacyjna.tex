@@ -1,0 +1,34 @@
+\documentclass[]{article}
+\usepackage{longtable}
+
+\input{preamble.tex}
+
+\colorlet{accent}{jimp}
+
+\title{Dokumentacja implementacyjna - Graficzny interfejs użytkownika dla wizualizacji grafów w języku Java}
+\author{\authoricon Aleksander Jóźwik, Anastasiya Kryvetskaya}
+\date{\dateicon \today}
+
+\definecolor{zalety}{HTML}{a6d189}
+\definecolor{wady}{HTML}{e78284}
+
+\begin{document}
+	\noindent
+	\maketitle
+
+	\tableofcontents
+	\clearpage
+
+    \section{Klasa  Main}
+    Odpowiada za uruchomienie UI programu.
+    \section{Klasa GraphVisualizerUI}
+    Odpowiada za stworzenie UI korzystając z innych klas. Posiada dwie funkcje prywatne:
+    \begin{itemize}
+        \item initFrame - ustawia właściwości okna tj. rozmiar, tytuł, układ rozmieszczenia elementów czy ikonę.
+        \item initLayout - dodaje pasek menu, lewe i prawe okno oraz pasek stanu.
+    \end{itemize}
+    \section{Klasa AppTheme}
+    Odpowiada za zdefiniowanie palety kolorów i czcionek.
+    \section{Klasa TopMenu}
+
+\end{document}
