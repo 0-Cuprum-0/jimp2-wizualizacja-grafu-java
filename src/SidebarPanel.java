@@ -1,11 +1,15 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class SidebarPanel extends JPanel {
-    public SidebarPanel() {
+    BackEnd engine;
+    public SidebarPanel(BackEnd engine) {
+        this.engine = engine;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(AppTheme.BG_COLOR);
         setBorder(new EmptyBorder(15, 15, 15, 15));
@@ -19,11 +23,19 @@ public class SidebarPanel extends JPanel {
         addPlainText("Algorytm");
 
         JComboBox<String> algorithmsChoice = new JComboBox<>(new String[] { "Fruchterman-Reingold", "Triangulacja" });
+
         algorithmsChoice.setAlignmentX(Component.CENTER_ALIGNMENT);
         algorithmsChoice.setMaximumSize(new Dimension(Integer.MAX_VALUE, algorithmsChoice.getPreferredSize().height));
 
         JButton runBtn = new JButton("URUCHOM");
         runBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        runBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("URUCHOM clicked");
+                engine.launchC();
+            }
+        });
 
         JButton fullBtn = new JButton("Pokaż w pełnym ekranie");
         fullBtn.setAlignmentX(Component.CENTER_ALIGNMENT);

@@ -27,6 +27,28 @@
         \item initFrame - ustawia właściwości okna tj. rozmiar, tytuł, układ rozmieszczenia elementów czy ikonę.
         \item initLayout - dodaje pasek menu, lewe i prawe okno oraz pasek stanu.
     \end{itemize}
+
+    \subsection{Klasa \texttt{GraphVisualizerUI}}
+Klasa ta stanowi główne okno aplikacji (\textit{Main Frame}). Dziedziczy po klasie \texttt{JFrame} i odpowiada za inicjalizację głównego interfejsu użytkownika, paska menu oraz rozmieszczenie głównych komponentów graficznych.
+
+\subsubsection{Konstruktor \texttt{GraphVisualizerUI()}}
+Publiczny konstruktor klasy, który konfiguruje okno i buduje strukturę wizualną aplikacji.
+\textbf{Realizowane operacje:}
+\begin{itemize}
+\item Konfiguracja parametrów okna (tytuł, rozmiar, ikona).
+\item Inicjalizacja paska menu poprzez wstrzyknięcie obiektu klasy \texttt{TopMenuBar}.
+\item Wywołanie metod rozmieszczających panele boczne oraz obszar rysowania grafu.
+\end{itemize}
+
+\subsubsection{Struktura Interfejsu (Layout)}
+Główny interfejs został zorganizowany przy użyciu menedżera układu \texttt{BorderLayout} oraz komponentu \texttt{JSplitPane}.
+\begin{itemize}
+\item \textbf{SidebarPanel} (Zachód/Lewo): Panel boczny zawierający opcje sterowania wizualizacją.
+\item \textbf{GraphCanvas} (Centrum): Główny obszar roboczy służący do renderowania grafu.
+\item \textbf{StatusBar} (Południe/Dół): Pasek informacyjny wyświetlający aktualny stan programu.
+\end{itemize}
+
+
     \section{Klasa AppTheme}
     Odpowiada za zdefiniowanie palety kolorów i czcionek.
     \section{Klasa TopMenuBar}

@@ -2,8 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GraphVisualizerUI extends JFrame {
-
-    public GraphVisualizerUI() {
+    BackEnd engine;
+    public GraphVisualizerUI(BackEnd engine) {
+        this.engine = engine;
         initFrame();
         setJMenuBar(new TopMenuBar());
         initLayout();
@@ -19,7 +20,7 @@ public class GraphVisualizerUI extends JFrame {
     }
 
     private void initLayout() {
-        JPanel sidebar = new SidebarPanel();
+        JPanel sidebar = new SidebarPanel(engine);
         JLabel statusBar = new StatusBar();
         JPanel canvas = new GraphCanvas();
 
