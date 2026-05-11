@@ -32,8 +32,9 @@ public class SidebarPanel extends JPanel {
         runBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String selectedValue = (String) algorithmsChoice.getSelectedItem();
                 System.out.println("URUCHOM clicked");
-                engine.launchC();
+                engine.launchC(selectedValue);
             }
         });
 

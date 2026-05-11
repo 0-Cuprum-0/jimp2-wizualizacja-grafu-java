@@ -1,5 +1,6 @@
 import javax.swing.*;
 public class Main {
+    //Backend -> GraphVisualizerUI() -> SideBarPanel()
     public static void main(String[] args) {
         BackEnd engine = new BackEnd();
         SwingUtilities.invokeLater(() -> {

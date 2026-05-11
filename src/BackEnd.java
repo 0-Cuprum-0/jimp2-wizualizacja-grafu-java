@@ -1,21 +1,21 @@
 import java.io.File;
 
 public class BackEnd {
-    /*
-    * alg = 0 Triangulacja
-    * alg = 1 Fruchterman-Reingold / Eades - domyślnie
-    */
-    int alg = 0;
+
+    String alg = "";
 
     File inputFile;
     BackEnd(){
+        //this.alg = selectedAlg;
+
 
 
     }
     public void readArg(){}
 
-    public void  launchC(){
+    public void  launchC(String selectedAlg){
         System.out.println("backend launched a command");
+        System.out.println("Wybrany alg:" + selectedAlg);
         //ProcessBuilder pb =
               //  new ProcessBuilder("./a.out ","-i", inputFile.getName(), "-t", "txt", "-a" );
     }
