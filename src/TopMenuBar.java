@@ -1,14 +1,24 @@
+import java.io.File;
+
 import javax.swing.*;
 public class TopMenuBar extends JMenuBar {
 
-    public TopMenuBar() {
+    private String openedFileName;
+    private GraphVisualizerUI ui;
+
+    public TopMenuBar(GraphVisualizerUI ui) {
+        this.ui = ui;
         setBackground(AppTheme.BG_COLOR);
         setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, AppTheme.FG_COLOR));
 
         // --- Zakładka "Plik" ---
         JMenu menuFile = createStyledMenu("Plik");
-        menuFile.add(createStyledMenuItem("Zapisz jako..."));
-        menuFile.add(createStyledMenuItem("Otwórz"));
+        JMenuItem menuSave = createStyledMenuItem("Zapisz jako...");
+        JMenuItem menuOpen  = createStyledMenuItem("Otwórz");
+        menuOpen.addActionListener(e -> openFileAction());
+
+        menuFile.add(menuSave);
+        menuFile.add(menuOpen);
         add(menuFile);
 
         // --- Zakładka "Widok" ---
@@ -56,5 +66,33 @@ public class TopMenuBar extends JMenuBar {
         return item;
     }
 
+    private void openFileAction(){
+        // Tworzymy okno dialogowe wyboru pliku
+        JFileChooser fileChooser = new JFileChooser();
 
+        // Ustawienie początkowego katalogu
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+
+        int result = fileChooser.showOpenDialog(this);
+
+        // Sprawdzamy, czy użytkownik kliknął "Otwórz"
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            openedFileName = selectedFile.getAbsolutePath();
+            ui.engine.setInputFile(selectedFile);
+            int amount_of_read_edges = ui.engine.readInputFile(selectedFile);
+
+            if(amount_of_read_edges > 0) {
+                ui.statusBar.setStatus("Wczytano " + amount_of_read_edges + " krawędzi.");
+            } else {
+                ui.statusBar.setStatus("Nie udało się wczytać pliku.");
+            }
+        } else {
+            ui.statusBar.setStatus("Anulowano operację odczytu pliku.");
+        }
+    }
+
+    public String getOpenFileName() {
+        return openedFileName;
+    }
 }

@@ -1,9 +1,195 @@
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.*;
 
-public class GraphCanvas extends JPanel{
-    public GraphCanvas() {
+public class GraphCanvas extends JPanel {
+    
+    GraphVisualizerUI ui;
+
+    // Parametry kamery
+    private double zoomFactor = 1.0;
+    private double offsetX = 0.0;
+    private double offsetY = 0.0;
+
+    // Zmienne do obsługi myszy
+    private Point lastMousePos;
+    private Vertex draggedVertex = null;
+    
+    private static final double WORLD_VERTEX_RADIUS = 2.0;
+
+    public GraphCanvas(GraphVisualizerUI ui) {
+        this.ui = ui;
         setBackground(AppTheme.BG_COLOR);
         setBorder(new EmptyBorder(15, 15, 15, 15));
+        
+        // Inicjalizacja początkowa kamery
+        offsetX = 400; 
+        offsetY = 300;
+
+        // Inicjalizacja nasłuchiwaczy myszy
+        MouseAdapter mouseHandler = new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lastMousePos = e.getPoint();
+                
+                if (ui.engine.vertices != null) {
+                    // Obliczamy aktualny promień na ekranie
+                    int currentRadius = (int)(WORLD_VERTEX_RADIUS * zoomFactor);
+                    
+                    for (int i = ui.engine.vertices.size() - 1; i >= 0; i--) {
+                        Vertex v = ui.engine.vertices.get(i);
+                        
+                        int screenX = (int)(v.x * zoomFactor + offsetX);
+                        int screenY = (int)(v.y * zoomFactor + offsetY);
+                        
+                        // Sprawdzamy czy mysz znajduje się wewnątrz wierzchołka
+                        if (Math.hypot(e.getX() - screenX, e.getY() - screenY) <= currentRadius) {
+                            draggedVertex = v;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                draggedVertex = null;
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (draggedVertex != null) {
+                    draggedVertex.x = (e.getX() - offsetX) / zoomFactor;
+                    draggedVertex.y = (e.getY() - offsetY) / zoomFactor;
+                } else {
+                    int dx = e.getX() - lastMousePos.x;
+                    int dy = e.getY() - lastMousePos.y;
+                    offsetX += dx;
+                    offsetY += dy;
+                }
+                lastMousePos = e.getPoint();
+                repaint();
+            }
+
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                double zoomMultiplier = 1.1;
+                double scaleChange = e.getWheelRotation() < 0 ? zoomMultiplier : 1.0 / zoomMultiplier;
+
+                offsetX = e.getX() - (e.getX() - offsetX) * scaleChange;
+                offsetY = e.getY() - (e.getY() - offsetY) * scaleChange;
+                zoomFactor *= scaleChange;
+
+                repaint();
+            }
+        };
+
+        addMouseListener(mouseHandler);
+        addMouseMotionListener(mouseHandler);
+        addMouseWheelListener(mouseHandler);
+    }
+
+    // Metoda pozwalająca wycentrować widok
+    public void resetCamera() {
+        // Rozmiar obszaru z C
+        double worldDimension = 100.0;
+        
+        // Margines, żeby graf nie dotykał samych krawędzi okna
+        double padding = 0.8; 
+        
+        // Obliczamy zoom, który sprawi, że 100x100 zmieści się w mniejszym wymiarze panelu
+        int minPanelDimension = Math.min(getWidth(), getHeight());
+
+        if (minPanelDimension == 0) minPanelDimension = 600;
+        zoomFactor = (minPanelDimension / worldDimension) * padding;
+        
+        // Centrujemy obszar 100x100 na środku płótna
+        offsetX = (getWidth() / 2.0) - (50.0 * zoomFactor);
+        offsetY = (getHeight() / 2.0) - (50.0 * zoomFactor);
+        
+        repaint();
+    }
+
+    // Funkcja szuka wierzchołka o podanym indeksie
+    private Vertex getVertexByIndex(int index) {
+        if (ui.engine.vertices == null) return null;
+        for (Vertex v : ui.engine.vertices) {
+            if (v.id == index) return v;
+        }
+        return null;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        if (ui == null || ui.engine.vertices == null || ui.engine.edges == null) {
+            return; 
+        }
+
+        Graphics2D g2d = (Graphics2D) g.create();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+        int currentRadius = (int) Math.max(WORLD_VERTEX_RADIUS * zoomFactor, 3);
+
+        // Krawędzie
+        g2d.setColor(AppTheme.FG_COLOR);
+        
+        // Skalowanie grubości krawędzi wraz z przybliżeniem
+        float currentStroke = (float) Math.max(0.5f * zoomFactor, 1.0f);
+        g2d.setStroke(new BasicStroke(currentStroke));
+
+        for (Edge e : ui.engine.edges) {
+            Vertex u = getVertexByIndex(e.u);
+            Vertex v = getVertexByIndex(e.v);
+            
+            if (u != null && v != null) {
+                int x1 = (int)(u.x * zoomFactor + offsetX);
+                int y1 = (int)(u.y * zoomFactor + offsetY);
+                int x2 = (int)(v.x * zoomFactor + offsetX);
+                int y2 = (int)(v.y * zoomFactor + offsetY);
+                
+                g2d.drawLine(x1, y1, x2, y2);
+            }
+        }
+
+        // Wierzchołki
+        for (Vertex v : ui.engine.vertices) {
+            int screenX = (int)(v.x * zoomFactor + offsetX);
+            int screenY = (int)(v.y * zoomFactor + offsetY);
+            
+            // Zmiana koloru jeżeli wierzchołek jest przeciągany
+            if (v == draggedVertex) {
+                g2d.setColor(AppTheme.VERTEX_DRAGGED_COLOR);
+            } else {
+                g2d.setColor(AppTheme.ACCENT_COLOR);
+            }
+            
+            g2d.fillOval(screenX - currentRadius, screenY - currentRadius, currentRadius * 2, currentRadius * 2);
+            
+            g2d.setColor(AppTheme.BG_COLOR);
+            g2d.drawOval(screenX - currentRadius, screenY - currentRadius, currentRadius * 2, currentRadius * 2);
+
+            g2d.setColor(Color.BLACK);
+            
+            String text = String.valueOf(v.id);
+            FontMetrics metrics = g2d.getFontMetrics(); // Pobieramy wymiary aktualnie ustawionej czcionki
+
+            // Szerokość tekstu
+            int textWidth = metrics.stringWidth(text);
+            
+            // Wysokość tekstu
+            int textHeight = metrics.getAscent() - metrics.getDescent();
+            
+            // Obliczamy dokładny punkt startu rysowania tekstu
+            int textX = screenX - (textWidth / 2);
+            int textY = screenY + (textHeight / 2);
+            
+            g2d.drawString(text, textX, textY);
+        }
+
+        g2d.dispose();
     }
 }

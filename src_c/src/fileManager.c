@@ -17,27 +17,15 @@ int FlagSetup(int argc, char* argv[], UserSettings* userSettings) {
                 NotifyError("Nie udało sie otworzyc pliku wejściowego.");
                 return 1;
             }
-            else {
-                char temp1[20];
-                int temp2, temp3;
-                double temp4;
-                while(fscanf(userSettings->fIn, "%s %d %d %lf", temp1, &temp2, &temp3, &temp4) == 4){
-                    userSettings->liczbaKrawedzi++;
-                    //nw jak inaczej sprawdzic liczbe wierzcholkow
-                    if (temp2 > userSettings->liczbaWierzcholkow) userSettings->liczbaWierzcholkow = temp2;
-                    if (temp3 > userSettings->liczbaWierzcholkow) userSettings->liczbaWierzcholkow = temp3;
-                }
-                fclose(userSettings->fIn);
-                userSettings->fIn = fopen(argv[i], "r"); //resetowanie wskaznika na poczatek pliku
-            }
         } 
         else if (!strcmp(argv[i], "-d")) {
             debug = 1;
         }
         else if (!strcmp(argv[i], "-a")) {
-            if (!strcmp(argv[++i], "FRE")) {
+            const char* alg_arg = argv[++i];
+            if (!strcmp(alg_arg, "FRE")) {
                 userSettings->chosenAlgorithm = FRE;
-            } else if (!strcmp(argv[i], "TRI")) {
+            } else if (!strcmp(alg_arg, "TRI")) {
                 userSettings->chosenAlgorithm = TRI;
             } else {
                 NotifyError("Nie podano lub blednie zapisano algorytm.");
@@ -93,36 +81,30 @@ int FlagSetup(int argc, char* argv[], UserSettings* userSettings) {
 vInt* FruchtermanReadInputFile(FILE* fIn, int* numOfVertices, int* numOfEdges) {
     //Struktura pliku wejsciowego: <nazwa_krawędzi> <wierzchołek_A> <wierzchołek_B> <waga_krawędzi> \n
     //Nazwa i waga krawedzi nas nie obchodzi
+    *numOfVertices = 0;
+    *numOfEdges = 0;
+    vInt* edges = NULL;
 
-    *numOfVertices = 1;
-    vInt* edges = malloc(*numOfVertices * sizeof(vInt));
-    for (int i = 0; i < *numOfVertices; i++) {
-        vIntInit(&edges[i]);
-    }
+    char name[100];
+    int which, toWhich;
+    double weight;
 
-    char line[256];
-    while (fgets(line, sizeof(line), fIn) != NULL) {
-        int which;
-        int toWhich;
+    while (fscanf(fIn, "%s %d %d %lf", name, &which, &toWhich, &weight) == 4) {
+        int max_id = (which > toWhich) ? which : toWhich;
+        int required_size = max_id + 1;
 
-        if (sscanf(line, "%*s %d %d", &which, &toWhich) != 2) {
-            continue;
-        }
-
-        int max = (which > toWhich) ? which : toWhich;
-
-        if (max > *numOfVertices) {
-            int prev = *numOfVertices;
-            *numOfVertices = max;
+        if (required_size > *numOfVertices) {
+            int prev_size = *numOfVertices;
+            *numOfVertices = required_size;
 
             edges = realloc(edges, *numOfVertices * sizeof(vInt));
-            for (int i = prev; i < *numOfVertices; i++) {
+            for (int i = prev_size; i < *numOfVertices; i++) {
                 vIntInit(&edges[i]);
             }
         }
 
-        vIntAdd(&edges[which - 1], toWhich - 1);
-        vIntAdd(&edges[toWhich - 1], which - 1);
+        vIntAdd(&edges[which], toWhich);
+        vIntAdd(&edges[toWhich], which);
 
         *numOfEdges += 1;
     }

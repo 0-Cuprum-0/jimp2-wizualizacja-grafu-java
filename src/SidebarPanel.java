@@ -7,9 +7,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class SidebarPanel extends JPanel {
-    BackEnd engine;
-    public SidebarPanel(BackEnd engine) {
-        this.engine = engine;
+    GraphVisualizerUI ui;
+    public SidebarPanel(GraphVisualizerUI ui) {
+        this.ui = ui;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(AppTheme.BG_COLOR);
         setBorder(new EmptyBorder(15, 15, 15, 15));
@@ -32,9 +32,18 @@ public class SidebarPanel extends JPanel {
         runBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedValue = (String) algorithmsChoice.getSelectedItem();
-                System.out.println("URUCHOM clicked");
-                engine.launchC(selectedValue);
+                String selectedAlgorithm = (String) algorithmsChoice.getSelectedItem();
+                System.out.println("Uruchomione wizualizację");
+                ui.engine.launchC(selectedAlgorithm);
+                int amount_of_read_vertices = ui.engine.readOutputFile();
+
+                if(amount_of_read_vertices > 0) {
+                    ui.statusBar.setStatus("Wczytano " + amount_of_read_vertices + " wierzchołków.");
+                } else {
+                    ui.statusBar.setStatus("Nie udało się wczytać pliku wyjściowego.");
+                }
+                ui.canvas.repaint();
+                ui.canvas.resetCamera();
             }
         });
 

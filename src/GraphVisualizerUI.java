@@ -3,11 +3,15 @@ import java.awt.*;
 
 public class GraphVisualizerUI extends JFrame {
     BackEnd engine;
+    SidebarPanel sidebar;
+    StatusBar statusBar;
+    GraphCanvas canvas;
+
     public GraphVisualizerUI(BackEnd engine) {
         this.engine = engine;
         initFrame();
-        setJMenuBar(new TopMenuBar());
         initLayout();
+        setJMenuBar(new TopMenuBar(this));
     }
 
     private void initFrame() {
@@ -20,9 +24,9 @@ public class GraphVisualizerUI extends JFrame {
     }
 
     private void initLayout() {
-        JPanel sidebar = new SidebarPanel(engine);
-        JLabel statusBar = new StatusBar();
-        JPanel canvas = new GraphCanvas();
+        sidebar = new SidebarPanel(this);
+        statusBar = new StatusBar();
+        canvas = new GraphCanvas(this);
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, sidebar, canvas);
         splitPane.setDividerLocation(250);
