@@ -8,6 +8,14 @@ import java.awt.event.MouseEvent;
 
 public class SidebarPanel extends JPanel {
     GraphVisualizerUI ui;
+
+    enum ColorSwatchesTypes {
+        EDGE_COLOR,
+        BG_COLOR,
+        VERTEX_COLOR,
+        VERTEX_TEXT_COLOR
+    }
+
     public SidebarPanel(GraphVisualizerUI ui) {
         this.ui = ui;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -17,24 +25,71 @@ public class SidebarPanel extends JPanel {
         buildUI();
     }
 
-    private void buildUI() {
-        
+    public void buildUI() {
+        removeAll();
+
         addSectionTitle("Parametry");
         addPlainText("Algorytm");
 
         JComboBox<String> algorithmsChoice = new JComboBox<>(new String[] { "Fruchterman-Reingold", "Triangulacja" });
+        if(ui.engine.selectedAlgorithm != null);
+        algorithmsChoice.setSelectedItem(ui.engine.selectedAlgorithm);
+        algorithmsChoice.addActionListener(e -> {
+            ui.engine.selectedAlgorithm = (String) algorithmsChoice.getSelectedItem();
+        });
 
         algorithmsChoice.setAlignmentX(Component.CENTER_ALIGNMENT);
         algorithmsChoice.setMaximumSize(new Dimension(Integer.MAX_VALUE, algorithmsChoice.getPreferredSize().height));
 
-        JButton runBtn = new JButton("URUCHOM");
+        JCheckBox weightCheckBox = new JCheckBox();
+        weightCheckBox.setSelected(ui.showWeights);
+        weightCheckBox.setBackground(AppTheme.BG_COLOR);
+        weightCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ui.showWeights = weightCheckBox.isSelected();
+                ui.canvas.repaint();
+            }
+        });
+        
+        JCheckBox labelCheckBox = new JCheckBox();
+        labelCheckBox.setSelected(ui.showLabels);
+        labelCheckBox.setBackground(AppTheme.BG_COLOR);
+        labelCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ui.showLabels = labelCheckBox.isSelected();
+                ui.canvas.repaint();
+            }
+        });
+
+        JButton resetBtn = new JButton("Resetuj ustawienia");
+        resetBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        resetBtn.addActionListener(e -> {
+            resetSettings();
+        });
+
+        JButton fullBtn = new JButton("Schowaj panel boczny");
+        fullBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        fullBtn.addActionListener(e -> {
+            ui.sidebar.setVisible(!ui.sidebar.isVisible());
+            ui.revalidate();
+            ui.repaint();
+        });
+
+        JButton runBtn = new JButton("Uruchom");
         runBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         runBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedAlgorithm = (String) algorithmsChoice.getSelectedItem();
+                if(!ui.engine.checkIfInputFileExists()) {
+                    ui.statusBar.setStatus("Nie wybrano pliku wejściowego.");
+                    return;
+                }
+
+                
                 System.out.println("Uruchomione wizualizację");
-                ui.engine.launchC(selectedAlgorithm);
+                ui.engine.launchC();
                 int amount_of_read_vertices = ui.engine.readOutputFile();
 
                 if(amount_of_read_vertices > 0) {
@@ -47,26 +102,22 @@ public class SidebarPanel extends JPanel {
             }
         });
 
-        JButton fullBtn = new JButton("Pokaż w pełnym ekranie");
-        fullBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JCheckBox weightCheckBox = new JCheckBox();
-        weightCheckBox.setBackground(AppTheme.BG_COLOR);
-        
-        JCheckBox labelCheckBox = new JCheckBox();
-        labelCheckBox.setBackground(AppTheme.BG_COLOR);
+        JPanel edgeColorSwatch = createColorSwatch(ui.edgeColor, ColorSwatchesTypes.EDGE_COLOR);
+        JPanel bgColorSwatch = createColorSwatch(ui.bgColor, ColorSwatchesTypes.BG_COLOR);
+        JPanel vertexColorSwatch = createColorSwatch(ui.vertexColor, ColorSwatchesTypes.VERTEX_COLOR);
+        JPanel vertexTextColorSwatch = createColorSwatch(ui.vertexTextColor, ColorSwatchesTypes.VERTEX_TEXT_COLOR);
 
         add(Box.createVerticalStrut(10));
         add(algorithmsChoice);
         add(Box.createVerticalStrut(10));
         
-        add(createRowWithLabel("Kolor krawędzi:", createColorSwatch(AppTheme.ACCENT_COLOR)));
+        add(createRowWithLabel("Kolor krawędzi:", edgeColorSwatch));
         add(Box.createVerticalStrut(10));
-        add(createRowWithLabel("Kolor tła:", createColorSwatch(AppTheme.ACCENT_COLOR)));
+        add(createRowWithLabel("Kolor tła:", bgColorSwatch));
         add(Box.createVerticalStrut(10));
-        add(createRowWithLabel("Kolor tła wierzchołków:", createColorSwatch(AppTheme.ACCENT_COLOR)));
+        add(createRowWithLabel("Kolor tła wierzchołków:", vertexColorSwatch));
         add(Box.createVerticalStrut(10));
-        add(createRowWithLabel("Kolor tekstu wierzchołków:", createColorSwatch(AppTheme.ACCENT_COLOR)));
+        add(createRowWithLabel("Kolor tekstu wierzchołków:", vertexTextColorSwatch));
         add(Box.createVerticalStrut(10));
         
         add(createRowWithLabel("Pokaż wagi", weightCheckBox));
@@ -77,15 +128,24 @@ public class SidebarPanel extends JPanel {
 
         add(fullBtn);
         add(Box.createVerticalStrut(10));
+
+        add(resetBtn);
+
+        add(Box.createVerticalStrut(10));
+
         add(runBtn);
 
 
         Dimension size = fullBtn.getPreferredSize();
         runBtn.setMaximumSize(size);
+        resetBtn.setMaximumSize(size);
         fullBtn.setMaximumSize(size);
+
+        revalidate();
+        repaint();
     }
 
-    private JPanel createColorSwatch(Color initialColor) {
+    private JPanel createColorSwatch(Color initialColor, ColorSwatchesTypes type) {
         JPanel swatch = new JPanel();
         swatch.setPreferredSize(new Dimension(24, 24)); 
         swatch.setBackground(initialColor);
@@ -98,6 +158,21 @@ public class SidebarPanel extends JPanel {
                 Color selectedColor = JColorChooser.showDialog(swatch, "Wybierz kolor", swatch.getBackground());
                 if (selectedColor != null) {
                     swatch.setBackground(selectedColor);
+                    switch (type) {
+                        case EDGE_COLOR:
+                            ui.edgeColor = selectedColor;
+                            break;
+                        case BG_COLOR:
+                            ui.bgColor = selectedColor;
+                            break;
+                        case VERTEX_COLOR:
+                            ui.vertexColor = selectedColor;
+                            break;
+                        case VERTEX_TEXT_COLOR:
+                            ui.vertexTextColor = selectedColor;
+                            break;
+                    }
+                    ui.canvas.repaint();
                 }
             }
         });
@@ -139,5 +214,16 @@ public class SidebarPanel extends JPanel {
         row.setMaximumSize(new Dimension(Integer.MAX_VALUE, element.getPreferredSize().height + 10));
 
         return row;
+    }
+
+    private void resetSettings() {
+        ui.showWeights = true;
+        ui.showLabels = true;
+        ui.edgeColor = AppTheme.FG_COLOR;
+        ui.bgColor = AppTheme.BG_COLOR;
+        ui.vertexColor = AppTheme.ACCENT_COLOR;
+        ui.vertexTextColor = AppTheme.FG_COLOR;
+        ui.sidebar.buildUI();
+        ui.canvas.repaint();
     }
 }

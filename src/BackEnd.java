@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class BackEnd {
 
-    String alg = "";
+    String selectedAlgorithm = "Fruchterman-Reingold";
 
     private File inputFile;
     private File outputFile;
@@ -23,18 +23,18 @@ public class BackEnd {
         String outputFilePath = System.getProperty("user.dir") + File.separator + "src_c" + File.separator + "output.txt";
         this.outputFile = new File(outputFilePath);
     }
-    public void readArg(){}
 
-    public void  launchC(String selectedAlg){
+    public void  launchC(){
         System.out.println("backend launched a command");
 
-        if("Fruchterman-Reingold".equals(selectedAlg)){
-            this.alg = "FRE";
+        String alg = "";
+
+        if("Fruchterman-Reingold".equals(selectedAlgorithm)){
+            alg = "FRE";
         }
-        else if("Triangulacja".equals(selectedAlg)){
-            this.alg = "TRI";
+        else if("Triangulacja".equals(selectedAlgorithm)){
+            alg = "TRI";
         }
-        System.out.println("Wybrano algorytm: " + this.alg);
 
         try{
             if (inputFile == null) {
@@ -116,5 +116,9 @@ public class BackEnd {
             System.err.println("Błąd: " + e.getMessage());
         }
         return 0;
+    }
+
+    public boolean checkIfInputFileExists(){
+        return inputFile != null;
     }
 }

@@ -13,7 +13,8 @@ public class TopMenuBar extends JMenuBar {
 
         // --- Zakładka "Plik" ---
         JMenu menuFile = createStyledMenu("Plik");
-        JMenuItem menuSave = createStyledMenuItem("Zapisz jako...");
+        JMenuItem menuSave = createStyledMenuItem("Wyeksportuj");
+        menuSave.addActionListener(e -> saveFileAction());
         JMenuItem menuOpen  = createStyledMenuItem("Otwórz");
         menuOpen.addActionListener(e -> openFileAction());
 
@@ -26,14 +27,17 @@ public class TopMenuBar extends JMenuBar {
         JMenu menuView = createStyledMenu("Widok");
         
         // Tworzymy elementy menu
-        JMenuItem fullScreenItem = createStyledMenuItem("Pełen ekran");
+        JMenuItem fullScreenItem = createStyledMenuItem("Zmień widoczność paska bocznego");
         fullScreenItem.setAccelerator(KeyStroke.getKeyStroke("F12"));
+        fullScreenItem.addActionListener(e -> toggleSideBar());
         
         JMenuItem toggleWeightsItem = createStyledMenuItem("Zmień widoczność wag");
         toggleWeightsItem.setAccelerator(KeyStroke.getKeyStroke("F1"));
+        toggleWeightsItem.addActionListener(e -> toggleWeights());
         
         JMenuItem toggleLabelsItem = createStyledMenuItem("Zmień widoczność etykiet krawędzi");
         toggleLabelsItem.setAccelerator(KeyStroke.getKeyStroke("F2"));
+        toggleLabelsItem.addActionListener(e -> toggleLabels());
 
         menuView.add(fullScreenItem);
         menuView.add(toggleWeightsItem);
@@ -43,12 +47,10 @@ public class TopMenuBar extends JMenuBar {
         // --- Zakładka "O programie" ---
         JMenuItem menuAbout = createStyledMenuItem("O programie");
         menuAbout.addActionListener(e -> {
-           // System.out.println("About was called!!!");
             AboutWindow aboutwindow = new AboutWindow();
             aboutwindow.setVisible(true);
         });
-        menuAbout.setMaximumSize(menuAbout.getPreferredSize()); //nie daje ostatniemu elementowi topMenuBar rosciągać się  na całośc miejsca
-
+        menuAbout.setMaximumSize(menuAbout.getPreferredSize());
         add(menuAbout);
     }
 
@@ -64,6 +66,30 @@ public class TopMenuBar extends JMenuBar {
         item.setBackground(AppTheme.BG_COLOR); 
         item.setForeground(AppTheme.FG_COLOR);
         return item;
+    }
+
+    private void saveFileAction() {
+        // Tworzymy okno dialogowe wyboru pliku
+        JFileChooser fileChooser = new JFileChooser();
+
+        // Ustawienie początkowego katalogu
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+
+        int result = fileChooser.showOpenDialog(this);
+
+        // Sprawdzamy, czy użytkownik kliknął "Zapisz"
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try{
+                ui.canvas.exportToPNG(selectedFile);
+                ui.statusBar.setStatus("Plik został zapisany.");
+            }
+            catch (Exception e) {
+                ui.statusBar.setStatus("Nie udało się zapisać pliku.");
+            }
+        } else {
+            ui.statusBar.setStatus("Anulowano operację zapisu pliku.");
+        }
     }
 
     private void openFileAction(){
@@ -94,5 +120,27 @@ public class TopMenuBar extends JMenuBar {
 
     public String getOpenFileName() {
         return openedFileName;
+    }
+
+    public void toggleSideBar() {
+        ui.sidebar.setVisible(!ui.sidebar.isVisible());
+        
+        if (ui.sidebar.isVisible() && ui.sidebar.getParent() instanceof JSplitPane) {
+            ((JSplitPane) ui.sidebar.getParent()).setDividerLocation(250);
+        }
+        ui.revalidate();
+        ui.repaint();
+    }
+
+    public void toggleWeights() {
+        ui.showWeights = !ui.showWeights;
+        ui.canvas.repaint();
+        ui.sidebar.buildUI();
+    }
+
+    public void toggleLabels() {
+        ui.showLabels = !ui.showLabels;
+        ui.canvas.repaint();
+        ui.sidebar.buildUI();
     }
 }

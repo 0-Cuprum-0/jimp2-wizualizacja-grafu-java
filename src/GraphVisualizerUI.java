@@ -7,6 +7,14 @@ public class GraphVisualizerUI extends JFrame {
     StatusBar statusBar;
     GraphCanvas canvas;
 
+    public boolean showWeights = true;
+    public boolean showLabels = true;
+
+    public Color edgeColor = AppTheme.FG_COLOR;
+    public Color bgColor = AppTheme.BG_COLOR;
+    public Color vertexColor = AppTheme.ACCENT_COLOR;
+    public Color vertexTextColor = AppTheme.FG_COLOR;
+
     public GraphVisualizerUI(BackEnd engine) {
         this.engine = engine;
         initFrame();
