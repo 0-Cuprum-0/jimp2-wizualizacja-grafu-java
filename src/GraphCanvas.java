@@ -144,15 +144,6 @@ public class GraphCanvas extends JPanel {
         repaint();
     }
 
-    // Funkcja szuka wierzchołka o podanym indeksie
-    private Vertex getVertexByIndex(int index) {
-        if (ui.engine.vertices == null) return null;
-        for (Vertex v : ui.engine.vertices) {
-            if (v.id == index) return v;
-        }
-        return null;
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -176,9 +167,15 @@ public class GraphCanvas extends JPanel {
         g2d.setFont(new Font("SansSerif", Font.PLAIN, edgeFontSize));
         FontMetrics edgeMetrics = g2d.getFontMetrics();
 
+        // Szybkie wyszukiwanie wierzchołków
+        java.util.Map<Integer, Vertex> vertexMap = new java.util.HashMap<>();
+        for (Vertex v : ui.engine.vertices) {
+            vertexMap.put(v.id, v);
+        }
+
         for (Edge e : ui.engine.edges) {
-            Vertex u = getVertexByIndex(e.u);
-            Vertex v = getVertexByIndex(e.v);
+            Vertex u = vertexMap.get(e.u);
+            Vertex v = vertexMap.get(e.v);
             
             if (u != null && v != null) {
                 int x1 = (int)(u.x * zoomFactor + offsetX);

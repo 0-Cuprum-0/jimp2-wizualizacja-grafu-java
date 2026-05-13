@@ -32,8 +32,9 @@ public class SidebarPanel extends JPanel {
         addPlainText("Algorytm");
 
         JComboBox<String> algorithmsChoice = new JComboBox<>(new String[] { "Fruchterman-Reingold", "Triangulacja" });
-        if(ui.engine.selectedAlgorithm != null);
-        algorithmsChoice.setSelectedItem(ui.engine.selectedAlgorithm);
+        if(ui.engine.selectedAlgorithm != null) {
+            algorithmsChoice.setSelectedItem(ui.engine.selectedAlgorithm);
+        }
         algorithmsChoice.addActionListener(e -> {
             ui.engine.selectedAlgorithm = (String) algorithmsChoice.getSelectedItem();
         });

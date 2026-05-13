@@ -55,9 +55,11 @@ public class AboutWindow extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-
-                    Desktop.getDesktop().browse(new URI("https://github.com/0-Cuprum-0/jimp2-wizualizacja-grafu-java"));
-
+                    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                        Desktop.getDesktop().browse(new URI("https://github.com/0-Cuprum-0/jimp2-wizualizacja-grafu-java"));
+                    } else {
+                        System.err.println("Otwieranie przeglądarki nie jest wspierane na tym urządzeniu.");
+                    }
                 } catch (IOException | URISyntaxException e1) {
                     e1.printStackTrace();
                 }
