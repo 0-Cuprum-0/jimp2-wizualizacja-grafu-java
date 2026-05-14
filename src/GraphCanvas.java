@@ -23,6 +23,8 @@ public class GraphCanvas extends JPanel {
     private static final int BASE_VERTEX_RADIUS = 10;
     private double userScale = 1.0;
 
+    public int baseVertexRadius = BASE_VERTEX_RADIUS;
+
     public GraphCanvas(GraphVisualizerUI ui) {
         this.ui = ui;
         setBackground(AppTheme.BG_COLOR);
@@ -40,7 +42,7 @@ public class GraphCanvas extends JPanel {
                 
                 if (ui.engine.vertices != null) {
                     // Obliczamy aktualny promień na ekranie
-                    int currentRadius = (int)Math.max(BASE_VERTEX_RADIUS * userScale, 3);
+                    int currentRadius = (int)Math.max(baseVertexRadius * userScale, 3);
                     
                     for (int i = ui.engine.vertices.size() - 1; i >= 0; i--) {
                         Vertex v = ui.engine.vertices.get(i);
@@ -157,7 +159,7 @@ public class GraphCanvas extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        int currentRadius = (int) Math.max(BASE_VERTEX_RADIUS * userScale, 3);
+        int currentRadius = (int) Math.max(baseVertexRadius * userScale, 3);
         
         // Skalowanie grubości krawędzi wraz z przybliżeniem
         float currentStroke = (float) Math.max(0.5f * userScale, 1.0f);

@@ -108,6 +108,12 @@ public class SidebarPanel extends JPanel {
         JPanel vertexColorSwatch = createColorSwatch(ui.vertexColor, ColorSwatchesTypes.VERTEX_COLOR);
         JPanel vertexTextColorSwatch = createColorSwatch(ui.vertexTextColor, ColorSwatchesTypes.VERTEX_TEXT_COLOR);
 
+        JSlider vertexRadius = new JSlider(0, 50, 10);
+        vertexRadius.addChangeListener(e -> {
+            ui.canvas.baseVertexRadius = vertexRadius.getValue();
+            ui.canvas.repaint();
+        });
+
         add(Box.createVerticalStrut(10));
         add(algorithmsChoice);
         add(Box.createVerticalStrut(10));
@@ -124,6 +130,10 @@ public class SidebarPanel extends JPanel {
         add(createRowWithLabel("Pokaż wagi", weightCheckBox));
         add(Box.createVerticalStrut(10));
         add(createRowWithLabel("Pokaż etykiety", labelCheckBox));
+
+        add(Box.createVerticalStrut(10));
+        addPlainText("Promień wierzchołka");
+        add(vertexRadius);
         
         add(Box.createVerticalGlue()); // Wypycha dolne przyciski na sam dół
 
