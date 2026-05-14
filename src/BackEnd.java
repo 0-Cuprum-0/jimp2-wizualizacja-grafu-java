@@ -38,7 +38,7 @@ public class BackEnd {
 
         try{
             if (inputFile == null) {
-                System.err.println("Błąd: Plik wejściowy nie został wybrany przed uruchomieniem algorytmu.");
+                System.err.println("BŁĄD: Plik wejściowy nie został wybrany przed uruchomieniem algorytmu.");
                 return;
             }
             String executablePath = System.getProperty("user.dir") + File.separator + "src_c" + File.separator + "a.out";
@@ -87,7 +87,7 @@ public class BackEnd {
             return edges.size();
 
         } catch (FileNotFoundException e) {
-            System.err.println("Błąd: Nie można znaleźć pliku - " + file.getAbsolutePath());
+            System.err.println("BŁĄD: Nie można znaleźć pliku - " + file.getAbsolutePath());
         } catch (Exception e) {
             System.err.println("Błąd podczas parsowania pliku: " + e.getMessage());
         }
@@ -111,9 +111,9 @@ public class BackEnd {
             return vertices.size();
 
         } catch (FileNotFoundException e) {
-            System.err.println("Błąd: Nie można znaleźć pliku - " + this.outputFile.getAbsolutePath());
+            System.err.println("BŁĄD: Nie można znaleźć pliku - " + this.outputFile.getAbsolutePath());
         } catch (Exception e) {
-            System.err.println("Błąd: " + e.getMessage());
+            System.err.println("BŁĄD: " + e.getMessage());
         }
         return 0;
     }

@@ -44,4 +44,10 @@ public class GraphVisualizerUI extends JFrame {
         add(splitPane, BorderLayout.CENTER);
         add(statusBar, BorderLayout.SOUTH);
     }
+
+    public void showErrorMessage(String message) { 
+        this.statusBar.setStatus("BŁĄD: " + message);
+        JOptionPane.showMessageDialog(new JFrame(), "BŁĄD: " +message, "Wystąpił błąd",
+        JOptionPane.ERROR_MESSAGE);
+    }
 }

@@ -84,7 +84,7 @@ public class SidebarPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!ui.engine.checkIfInputFileExists()) {
-                    ui.statusBar.setStatus("Nie wybrano pliku wejściowego.");
+                    ui.showErrorMessage("Nie wybrano pliku wejśćiowego.");
                     return;
                 }
 
@@ -96,7 +96,7 @@ public class SidebarPanel extends JPanel {
                 if(amount_of_read_vertices > 0) {
                     ui.statusBar.setStatus("Wczytano " + amount_of_read_vertices + " wierzchołków.");
                 } else {
-                    ui.statusBar.setStatus("Nie udało się wczytać pliku wyjściowego.");
+                   ui.showErrorMessage("Nie udało się wczytać pliku wyjściowego.");
                 }
                 ui.canvas.repaint();
                 ui.canvas.resetCamera();

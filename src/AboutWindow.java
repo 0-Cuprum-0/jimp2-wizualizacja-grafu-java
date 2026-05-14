@@ -7,7 +7,11 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class AboutWindow extends JFrame {
-    public AboutWindow (){
+
+    GraphVisualizerUI ui;
+
+    public AboutWindow (GraphVisualizerUI ui){
+        this.ui = ui;
         createAboutWindow();
         initLayout();
     }
@@ -59,6 +63,7 @@ public class AboutWindow extends JFrame {
                         Desktop.getDesktop().browse(new URI("https://github.com/0-Cuprum-0/jimp2-wizualizacja-grafu-java"));
                     } else {
                         System.err.println("Otwieranie przeglądarki nie jest wspierane na tym urządzeniu.");
+                        ui.showErrorMessage("Otwieranie przeglądarki nie jest wspierane na tym urządzeniu.");
                     }
                 } catch (IOException | URISyntaxException e1) {
                     e1.printStackTrace();

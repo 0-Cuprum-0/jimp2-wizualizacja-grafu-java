@@ -47,7 +47,7 @@ public class TopMenuBar extends JMenuBar {
         // --- Zakładka "O programie" ---
         JMenuItem menuAbout = createStyledMenuItem("O programie");
         menuAbout.addActionListener(e -> {
-            AboutWindow aboutwindow = new AboutWindow();
+            AboutWindow aboutwindow = new AboutWindow(ui);
             aboutwindow.setVisible(true);
         });
         menuAbout.setMaximumSize(menuAbout.getPreferredSize());
