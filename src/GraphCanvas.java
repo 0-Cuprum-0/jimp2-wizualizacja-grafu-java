@@ -257,7 +257,7 @@ public class GraphCanvas extends JPanel {
     }
 
     public void exportToPNG(File file) throws IOException {
-        BufferedImage image = new BufferedImage(getWidth()*2, getHeight()*2, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
         
         Graphics2D g2d = image.createGraphics();
         
