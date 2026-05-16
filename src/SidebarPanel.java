@@ -43,23 +43,23 @@ public class SidebarPanel extends JPanel {
         algorithmsChoice.setMaximumSize(new Dimension(Integer.MAX_VALUE, algorithmsChoice.getPreferredSize().height));
 
         JCheckBox weightCheckBox = new JCheckBox();
-        weightCheckBox.setSelected(ui.showWeights);
+        weightCheckBox.setSelected(ui.settings.showWeights);
         weightCheckBox.setBackground(AppTheme.BG_COLOR);
         weightCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ui.showWeights = weightCheckBox.isSelected();
+                ui.settings.showWeights = weightCheckBox.isSelected();
                 ui.canvas.repaint();
             }
         });
         
         JCheckBox labelCheckBox = new JCheckBox();
-        labelCheckBox.setSelected(ui.showLabels);
+        labelCheckBox.setSelected(ui.settings.showLabels);
         labelCheckBox.setBackground(AppTheme.BG_COLOR);
         labelCheckBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ui.showLabels = labelCheckBox.isSelected();
+                ui.settings.showLabels = labelCheckBox.isSelected();
                 ui.canvas.repaint();
             }
         });
@@ -103,10 +103,10 @@ public class SidebarPanel extends JPanel {
             }
         });
 
-        JPanel edgeColorSwatch = createColorSwatch(ui.edgeColor, ColorSwatchesTypes.EDGE_COLOR);
-        JPanel bgColorSwatch = createColorSwatch(ui.bgColor, ColorSwatchesTypes.BG_COLOR);
-        JPanel vertexColorSwatch = createColorSwatch(ui.vertexColor, ColorSwatchesTypes.VERTEX_COLOR);
-        JPanel vertexTextColorSwatch = createColorSwatch(ui.vertexTextColor, ColorSwatchesTypes.VERTEX_TEXT_COLOR);
+        JPanel edgeColorSwatch = createColorSwatch(ui.settings.edgeColor, ColorSwatchesTypes.EDGE_COLOR);
+        JPanel bgColorSwatch = createColorSwatch(ui.settings.bgColor, ColorSwatchesTypes.BG_COLOR);
+        JPanel vertexColorSwatch = createColorSwatch(ui.settings.vertexColor, ColorSwatchesTypes.VERTEX_COLOR);
+        JPanel vertexTextColorSwatch = createColorSwatch(ui.settings.vertexTextColor, ColorSwatchesTypes.VERTEX_TEXT_COLOR);
 
         JSlider vertexRadius = new JSlider(0, 50, 10);
         vertexRadius.addChangeListener(e -> {
@@ -171,16 +171,16 @@ public class SidebarPanel extends JPanel {
                     swatch.setBackground(selectedColor);
                     switch (type) {
                         case EDGE_COLOR:
-                            ui.edgeColor = selectedColor;
+                            ui.settings.edgeColor = selectedColor;
                             break;
                         case BG_COLOR:
-                            ui.bgColor = selectedColor;
+                            ui.settings.bgColor = selectedColor;
                             break;
                         case VERTEX_COLOR:
-                            ui.vertexColor = selectedColor;
+                            ui.settings.vertexColor = selectedColor;
                             break;
                         case VERTEX_TEXT_COLOR:
-                            ui.vertexTextColor = selectedColor;
+                            ui.settings.vertexTextColor = selectedColor;
                             break;
                     }
                     ui.canvas.repaint();
@@ -228,12 +228,12 @@ public class SidebarPanel extends JPanel {
     }
 
     private void resetSettings() {
-        ui.showWeights = true;
-        ui.showLabels = true;
-        ui.edgeColor = AppTheme.FG_COLOR;
-        ui.bgColor = AppTheme.BG_COLOR;
-        ui.vertexColor = AppTheme.ACCENT_COLOR;
-        ui.vertexTextColor = AppTheme.FG_COLOR;
+        ui.settings.showWeights = true;
+        ui.settings.showLabels = true;
+        ui.settings.edgeColor = AppTheme.FG_COLOR;
+        ui.settings.bgColor = AppTheme.BG_COLOR;
+        ui.settings.vertexColor = AppTheme.ACCENT_COLOR;
+        ui.settings.vertexTextColor = AppTheme.FG_COLOR;
         ui.sidebar.buildUI();
         ui.canvas.repaint();
     }

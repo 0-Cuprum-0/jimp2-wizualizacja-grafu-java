@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 public class BackEnd {
 
+    GraphVisualizerUI ui;
+
     String selectedAlgorithm = "Fruchterman-Reingold";
 
     private File inputFile;
@@ -16,7 +18,6 @@ public class BackEnd {
     List<Edge> edges;
     List<Vertex> vertices;
     BackEnd(){
-        //this.alg = selectedAlg;
         this.edges = new ArrayList<>();
         this.vertices = new ArrayList<>();
         this.inputFile = null;
@@ -24,9 +25,11 @@ public class BackEnd {
         this.outputFile = new File(outputFilePath);
     }
 
-    public void  launchC(){
-        System.out.println("backend launched a command");
+    public void setUI(GraphVisualizerUI ui) {
+        this.ui = ui;
+    }
 
+    public void  launchC(){
         String alg = "";
 
         if("Fruchterman-Reingold".equals(selectedAlgorithm)){
@@ -39,6 +42,7 @@ public class BackEnd {
         try{
             if (inputFile == null) {
                 System.err.println("BŁĄD: Plik wejściowy nie został wybrany przed uruchomieniem algorytmu.");
+                ui.showErrorMessage("BŁĄD: Plik wejściowy nie został wybrany przed uruchomieniem algorytmu.");
                 return;
             }
             String executablePath = System.getProperty("user.dir") + File.separator + "src_c" + File.separator + "a.out";
@@ -88,8 +92,10 @@ public class BackEnd {
 
         } catch (FileNotFoundException e) {
             System.err.println("BŁĄD: Nie można znaleźć pliku - " + file.getAbsolutePath());
+            ui.showErrorMessage("BŁĄD: Nie można znaleźć pliku - " + file.getAbsolutePath());
         } catch (Exception e) {
             System.err.println("Błąd podczas parsowania pliku: " + e.getMessage());
+            ui.showErrorMessage("Błąd podczas parsowania pliku: " + e.getMessage());
         }
         return 0;
     }
@@ -112,8 +118,10 @@ public class BackEnd {
 
         } catch (FileNotFoundException e) {
             System.err.println("BŁĄD: Nie można znaleźć pliku - " + this.outputFile.getAbsolutePath());
+            ui.showErrorMessage("BŁĄD: Nie można znaleźć pliku - " + this.outputFile.getAbsolutePath());
         } catch (Exception e) {
             System.err.println("BŁĄD: " + e.getMessage());
+            ui.showErrorMessage("BŁĄD: " + e.getMessage());
         }
         return 0;
     }

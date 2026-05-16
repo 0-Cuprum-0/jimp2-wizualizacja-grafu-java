@@ -133,13 +133,13 @@ public class TopMenuBar extends JMenuBar {
     }
 
     public void toggleWeights() {
-        ui.showWeights = !ui.showWeights;
+        ui.settings.showWeights = !ui.settings.showWeights;
         ui.canvas.repaint();
         ui.sidebar.buildUI();
     }
 
     public void toggleLabels() {
-        ui.showLabels = !ui.showLabels;
+        ui.settings.showLabels = !ui.settings.showLabels;
         ui.canvas.repaint();
         ui.sidebar.buildUI();
     }

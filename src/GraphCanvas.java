@@ -149,7 +149,7 @@ public class GraphCanvas extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        setBackground(ui.bgColor);
+        setBackground(ui.settings.bgColor);
         
         if (ui == null || ui.engine.vertices == null || ui.engine.edges == null) {
             return; 
@@ -185,19 +185,19 @@ public class GraphCanvas extends JPanel {
                 int x2 = (int)(v.x * zoomFactor + offsetX);
                 int y2 = (int)(v.y * zoomFactor + offsetY);
                 
-                g2d.setColor(ui.edgeColor);
+                g2d.setColor(ui.settings.edgeColor);
                 g2d.drawLine(x1, y1, x2, y2);
 
-                if (ui.showLabels || ui.showWeights) {
+                if (ui.settings.showLabels || ui.settings.showWeights) {
                     // Budujemy tekst do wyświetlenia w zależności od włączonych opcji
                     StringBuilder edgeText = new StringBuilder();
-                    if (ui.showLabels && e.name != null) {
+                    if (ui.settings.showLabels && e.name != null) {
                         edgeText.append(e.name);
                     }
-                    if (ui.showWeights && e.weight != null) {
+                    if (ui.settings.showWeights && e.weight != null) {
                         if (edgeText.length() > 0) edgeText.append(" (");
                         edgeText.append(e.weight);
-                        if (ui.showLabels) edgeText.append(")");
+                        if (ui.settings.showLabels) edgeText.append(")");
                     }
 
                     if (edgeText.length() > 0) {
@@ -210,10 +210,10 @@ public class GraphCanvas extends JPanel {
                         int midY = (y1 + y2) / 2;
 
                         // Rysujemy małe tło, żeby linia nie przekreślała tekstu
-                        g2d.setColor(ui.bgColor);
+                        g2d.setColor(ui.settings.bgColor);
                         g2d.fillRect(midX - (textW / 2) - 2, midY - (textH / 2) - 2, textW + 4, textH + 4);
 
-                        g2d.setColor(ui.edgeColor);
+                        g2d.setColor(ui.settings.edgeColor);
                         g2d.drawString(text, midX - (textW / 2), midY + (textH / 2));
                     }
                 }
@@ -229,15 +229,15 @@ public class GraphCanvas extends JPanel {
             if (v == draggedVertex) {
                 g2d.setColor(AppTheme.VERTEX_DRAGGED_COLOR);
             } else {
-                g2d.setColor(ui.vertexColor);
+                g2d.setColor(ui.settings.vertexColor);
             }
             
             g2d.fillOval(screenX - currentRadius, screenY - currentRadius, currentRadius * 2, currentRadius * 2);
             
-            g2d.setColor(ui.bgColor);
+            g2d.setColor(ui.settings.bgColor);
             g2d.drawOval(screenX - currentRadius, screenY - currentRadius, currentRadius * 2, currentRadius * 2);
 
-            g2d.setColor(ui.vertexTextColor);
+            g2d.setColor(ui.settings.vertexTextColor);
             
             String text = String.valueOf(v.id);
             FontMetrics metrics = g2d.getFontMetrics(); // Pobieramy wymiary aktualnie ustawionej czcionki
