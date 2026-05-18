@@ -1,3 +1,4 @@
+%!TEX program = lualatex
 \documentclass[]{article}
 \usepackage{longtable}
 
@@ -67,9 +68,29 @@ Główny interfejs został zorganizowany przy użyciu menedżera układu \texttt
         \item createRowWithLabel - tworzy panel, w którym umieszcza etykietę i element podany jako argument.
     \end{itemize}
     \section{Klasa StatusBar}
-    Odpowiada za dolny pasek stanu.
+   Odpowiada za dolny pasek stanu programu. 
+
+\begin{itemize}
+    \item setStatus -- ustawia i aktualizuje treść komunikatu wyświetlanego użytkownikowi na pasku stanu.
+\end{itemize}
+
     \section{Klasa GraphCanvas}
-    Odpowiada za płótno na którym wyświetalana jest wizualizacja.
+
+Odpowiada za graficzne renderowanie struktury grafu oraz obsługę interakcji myszy. Posiada trzy funkcje publiczne i konstruktor:
+
+\begin{itemize}
+    \item GraphCanvas(GraphVisualizerUI ui) -- konstruktor klasy; wiąże panel rysowania z kontekstem aplikacji, ustawia tło, marginesy, początkową pozycję kamery oraz rejestruje nasłuchiwacze zdarzeń myszy.
+    \item resetCamera -- automatycznie kalkuluje granice grafu, centruje widok oraz dopasowuje współczynnik skalowania do bieżących wymiarów panelu.
+    \item paintComponent -- nadpisuje natywną metodę rysującą komponent, odpowiadając za renderowanie krawędzi, wag, etykiet oraz wierzchołków z użyciem antyaliasingu.
+    \item exportToPNG -- przechwytuje bieżący stan renderowania płótna i zapisuje go w formacie grafiki rastrowej PNG pod wskazaną ścieżką.
+\end{itemize}
     \section{Klasa AboutWindow}
-    Odpowiada za okno "O Programie".
+
+Odpowiada za wyświetlanie okna informacyjnego o programie (autorzy, wersja, link do repozytorium). Posiada dwie funkcje publiczne i konstruktor:
+
+\begin{itemize}
+    \item centerThisText -- konfiguruje przekazaną etykietę tekstową, ustawiając jej kolor z motywu aplikacji oraz wyrównując ją do środka w osi X.
+    \item createImageIcon -- wczytuje plik graficzny logo, skaluje go do wymiarów 120x120 pikseli z użyciem wygładzania i zwraca jako wycentrowany komponent etykiety.
+\end{itemize}
 \end{document}
+--comment

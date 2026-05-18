@@ -32,3 +32,13 @@ bin/
 *.idea/*
 *syncthing*
 *sync-conflict*
+.run_this_shit.sh
+*.aux 
+*.bcf 
+*.fdb_lat
+*.fls 
+*.log 
+*.out
+*.run.xml 
+*.synctex
+*.tox
