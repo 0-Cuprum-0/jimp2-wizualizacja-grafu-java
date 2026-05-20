@@ -64,6 +64,11 @@ public class BackEnd {
             int exitCode = process.waitFor();
             System.out.println("----------------------------");
             System.out.println("Program w C zakończył się z kodem: " + exitCode);
+
+            if(exitCode != 0) {
+                ui.showErrorMessage("Błąd: Nie udało się wykonać wizualizacji. Program obliczeniowy zakończył się z kodem: " + exitCode);
+                return;
+            }
         }
         catch (Exception e) {
             e.printStackTrace();
