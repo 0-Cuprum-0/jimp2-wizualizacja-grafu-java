@@ -1,6 +1,7 @@
 import java.io.File;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 public class TopMenuBar extends JMenuBar {
 
     private String openedFileName;
@@ -74,8 +75,10 @@ public class TopMenuBar extends JMenuBar {
 
         // Ustawienie początkowego katalogu
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setDialogTitle("Wyeksportuj graf jako obraz PNG");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Pliki obrazów (*.png)", "png"));
 
-        int result = fileChooser.showOpenDialog(this);
+        int result = fileChooser.showSaveDialog(this);
 
         // Sprawdzamy, czy użytkownik kliknął "Zapisz"
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -98,6 +101,8 @@ public class TopMenuBar extends JMenuBar {
 
         // Ustawienie początkowego katalogu
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setDialogTitle("Otwórz plik wejściowy grafu");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Pliki tekstowe (*.txt)", "txt"));
 
         int result = fileChooser.showOpenDialog(this);
 

@@ -1,0 +1,20 @@
+\xpg@aux {}{polish}
+\contentsline {section}{\numberline {1}Architektura systemu}{2}{section.1}%
+\contentsline {section}{\numberline {2}Rdzeń programu}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Klasa Main}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Klasa GraphVisualizerUI}{4}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Konstruktor \texttt {GraphVisualizerUI()}}{4}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Struktura Interfejsu (Layout)}{4}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Klasa BackEnd}{4}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Klasy elementów UI}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Klasa GraphCanvas}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Klasa TopMenuBar}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Klasa SidebarPanel}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Klasa StatusBar}{6}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Klasa AboutWindow}{6}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Klasy przechowujące dane}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Klasa Vertex}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Klasa Edge}{7}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Klasy dla ustawień programu}{7}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Klasa VisualizationSettings}{7}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Klasa AppTheme}{7}{subsection.5.2}%

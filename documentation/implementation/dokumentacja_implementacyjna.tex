@@ -20,77 +20,126 @@
 	\tableofcontents
 	\clearpage
 
-    \section{Klasa  Main}
+    \section{Architektura systemu}
+    Struktura klas oraz przepływ sterowania w programie zostały zilustrowane za pomocą poniższych diagramów. 
+
+    \framedfigure{assets/diagram_klas.png}{1\textwidth}{Diagram klas programu}{fig:class_diagram}
+
+    \framedfigure{assets/schemat_blokowy.png}{0.5\textwidth}{Schemat blokowy działania programu}{fig:flowchart}
+    
+    \clearpage
+
+    \section{Rdzeń programu}
+
+    \subsection{Klasa  Main}
     Odpowiada za uruchomienie UI programu.
-    \section{Klasa GraphVisualizerUI}
-    Odpowiada za stworzenie UI korzystając z innych klas. Posiada dwie funkcje prywatne:
+    \subsection{Klasa GraphVisualizerUI}
+    Klasa ta stanowi główne okno aplikacji (\textit{Main Frame}). Dziedziczy po klasie \texttt{JFrame} i odpowiada za inicjalizację głównego interfejsu użytkownika, paska menu oraz rozmieszczenie głównych komponentów graficznych. Posiada dwie funkcje prywatne:
     \begin{itemize}
-        \item initFrame - ustawia właściwości okna tj. rozmiar, tytuł, układ rozmieszczenia elementów czy ikonę.
-        \item initLayout - dodaje pasek menu, lewe i prawe okno oraz pasek stanu.
+        \item initFrame -- ustawia właściwości okna tj. rozmiar, tytuł, układ rozmieszczenia elementów czy ikonę.
+        \item initLayout -- dodaje pasek menu, lewe i prawe okno oraz pasek stanu.
+    \end{itemize}
+    Oraz funkcję publiczną \texttt{showErrorMessage}, która pozwala na wyświetlenie okna dialogowego z błędem oraz zmienia komunikat paska stanu.
+
+    \subsubsection{Konstruktor \texttt{GraphVisualizerUI()}}
+    Publiczny konstruktor klasy, który konfiguruje okno i buduje strukturę wizualną aplikacji.
+    \textbf{Realizowane operacje:}
+    \begin{itemize}
+    \item Konfiguracja parametrów okna (tytuł, rozmiar, ikona).
+    \item Inicjalizacja paska menu poprzez wstrzyknięcie obiektu klasy \texttt{TopMenuBar}.
+    \item Wywołanie metod rozmieszczających panele boczne oraz obszar rysowania grafu.
     \end{itemize}
 
-    \subsection{Klasa \texttt{GraphVisualizerUI}}
-Klasa ta stanowi główne okno aplikacji (\textit{Main Frame}). Dziedziczy po klasie \texttt{JFrame} i odpowiada za inicjalizację głównego interfejsu użytkownika, paska menu oraz rozmieszczenie głównych komponentów graficznych.
-
-\subsubsection{Konstruktor \texttt{GraphVisualizerUI()}}
-Publiczny konstruktor klasy, który konfiguruje okno i buduje strukturę wizualną aplikacji.
-\textbf{Realizowane operacje:}
-\begin{itemize}
-\item Konfiguracja parametrów okna (tytuł, rozmiar, ikona).
-\item Inicjalizacja paska menu poprzez wstrzyknięcie obiektu klasy \texttt{TopMenuBar}.
-\item Wywołanie metod rozmieszczających panele boczne oraz obszar rysowania grafu.
-\end{itemize}
-
-\subsubsection{Struktura Interfejsu (Layout)}
-Główny interfejs został zorganizowany przy użyciu menedżera układu \texttt{BorderLayout} oraz komponentu \texttt{JSplitPane}.
-\begin{itemize}
-\item \textbf{SidebarPanel} (Zachód/Lewo): Panel boczny zawierający opcje sterowania wizualizacją.
-\item \textbf{GraphCanvas} (Centrum): Główny obszar roboczy służący do renderowania grafu.
-\item \textbf{StatusBar} (Południe/Dół): Pasek informacyjny wyświetlający aktualny stan programu.
-\end{itemize}
-
-
-    \section{Klasa AppTheme}
-    Odpowiada za zdefiniowanie palety kolorów i czcionek.
-    \section{Klasa TopMenuBar}
-    Odpowiada za górny pasek menu. Posiada dwie funkcje prywatne:
+    \subsubsection{Struktura Interfejsu (Layout)}
+    Główny interfejs został zorganizowany przy użyciu menedżera układu \texttt{BorderLayout} oraz komponentu \texttt{JSplitPane}.
     \begin{itemize}
-        \item createStyledMenu - tworzy nowy menu zgodnie z paletą kolorów.
-        \item createStyledMenuItem - tworzy nowy element menu zgodnie z paletą kolorów.
+    \item \textbf{SidebarPanel} (Zachód/Lewo): Panel boczny zawierający opcje sterowania wizualizacją.
+    \item \textbf{GraphCanvas} (Centrum): Główny obszar roboczy służący do renderowania grafu.
+    \item \textbf{StatusBar} (Południe/Dół): Pasek informacyjny wyświetlający aktualny stan programu.
     \end{itemize}
-    \section{Klasa SidebarPanel}
-    Odpowiada za boczny panel pozwalający na konfiguracje parametrów programu i uruchomienie wizualizacji.
+
+    \subsection{Klasa BackEnd}
+    Odpowiada za warstwę logiczną aplikacji i komunikację z zewnętrznym programem obliczeniowym napisanym w języku C. Zarządza przechowywaniem wczytanego grafu (wierzchołków i krawędzi) oraz plikami wejściowymi i wyjściowymi.
+    Posiada konstruktor \texttt{BackEnd()}, który inicjalizuje puste listy krawędzi i wierzchołków oraz ustawia domyślną ścieżkę pliku wyjściowego (\texttt{output.txt}).
+    
+    Klasa posiada następujące funkcje publiczne:
     \begin{itemize}
-        \item buildUI - tworzy elementy UI w bocznym panelu.
-        \item createColorSwatch - tworzy przycisk odpowiadający za zmianę koloru.
-        \item addPlainText - służy do tworzenia zwykłego tekstu.
-        \item addSectionText - służy do tworzenia tekstu nagłówkowego.
-        \item createRowWithLabel - tworzy panel, w którym umieszcza etykietę i element podany jako argument.
+        \item setUI -- przypisuje referencję do głównego okna interfejsu (\texttt{GraphVisualizerUI}), co pozwala na m.in. wyświetlanie komunikatów o błędach.
+        \item launchC -- odpowiada za przygotowanie odpowiednich argumentów i uruchomienie zewnętrznego programu w C (\texttt{a.out}) jako osobnego procesu, a następnie przechwytuje i wypisuje jego standardowe wyjście.
+        \item setInputFile -- ustawia referencję do pliku wejściowego wybranego przez użytkownika.
+        \item readInputFile -- parsuje zawartość pliku wejściowego, dodając odczytane obiekty do listy krawędzi (\texttt{edges}). Zwraca liczbę wczytanych elementów.
+        \item readOutputFile -- parsuje zawartość pliku wyjściowego wygenerowanego przez algorytm, aktualizując współrzędne w liście wierzchołków (\texttt{vertices}). Zwraca liczbę poprawnie wczytanych wierzchołków.
+        \item checkIfInputFileExists -- zwraca wartość logiczną informującą, czy plik wejściowy został wcześniej wybrany i załadowany.
     \end{itemize}
-    \section{Klasa StatusBar}
-   Odpowiada za dolny pasek stanu programu. 
 
-\begin{itemize}
-    \item setStatus -- ustawia i aktualizuje treść komunikatu wyświetlanego użytkownikowi na pasku stanu.
-\end{itemize}
+    \section{Klasy elementów UI}
 
-    \section{Klasa GraphCanvas}
+    \subsection{Klasa GraphCanvas}
 
-Odpowiada za graficzne renderowanie struktury grafu oraz obsługę interakcji myszy. Posiada trzy funkcje publiczne i konstruktor:
+    Odpowiada za graficzne renderowanie struktury grafu oraz obsługę interakcji myszy. Posiada trzy funkcje publiczne i konstruktor:
 
-\begin{itemize}
-    \item GraphCanvas(GraphVisualizerUI ui) -- konstruktor klasy; wiąże panel rysowania z kontekstem aplikacji, ustawia tło, marginesy, początkową pozycję kamery oraz rejestruje nasłuchiwacze zdarzeń myszy.
-    \item resetCamera -- automatycznie kalkuluje granice grafu, centruje widok oraz dopasowuje współczynnik skalowania do bieżących wymiarów panelu.
-    \item paintComponent -- nadpisuje natywną metodę rysującą komponent, odpowiadając za renderowanie krawędzi, wag, etykiet oraz wierzchołków z użyciem antyaliasingu.
-    \item exportToPNG -- przechwytuje bieżący stan renderowania płótna i zapisuje go w formacie grafiki rastrowej PNG pod wskazaną ścieżką.
-\end{itemize}
-    \section{Klasa AboutWindow}
+    \begin{itemize}
+        \item GraphCanvas(GraphVisualizerUI ui) -- konstruktor klasy; wiąże panel rysowania z kontekstem aplikacji, ustawia tło, marginesy, początkową pozycję kamery oraz rejestruje nasłuchiwacze zdarzeń myszy.
+        \item resetCamera -- automatycznie kalkuluje granice grafu, centruje widok oraz dopasowuje współczynnik skalowania do bieżących wymiarów panelu.
+        \item paintComponent -- nadpisuje natywną metodę rysującą komponent, odpowiadając za renderowanie krawędzi, wag, etykiet oraz wierzchołków z użyciem antyaliasingu.
+        \item exportToPNG -- przechwytuje bieżący stan renderowania płótna i zapisuje go w formacie grafiki rastrowej PNG pod wskazaną ścieżką.
+    \end{itemize}
 
-Odpowiada za wyświetlanie okna informacyjnego o programie (autorzy, wersja, link do repozytorium). Posiada dwie funkcje publiczne i konstruktor:
+    \subsection{Klasa TopMenuBar}
+    Odpowiada za górny pasek menu. Posiada następujące funkcje prywatne:
+    \begin{itemize}
+        \item createStyledMenu -- tworzy nowy menu zgodnie z paletą kolorów.
+        \item createStyledMenuItem -- tworzy nowy element menu zgodnie z paletą kolorów.
+        \item saveFileAction -- otwiera okno dialogowe do zapisu pliku, wywołuje funkcje eksportującą graf do pliku PNG z klasy \texttt{GraphCanvas}, a następnie pokazuje komunikat w pasku stanu.
+        \item openFileAction -- otwiera okno dialogowe do odczytu pliku, wywołuje funkcje wczytującą plik z klasy \texttt{BackEnd}, a następnie pokazuje komunikat w pasku stanu.
+    \end{itemize}
+    Oraz funkcje publiczne:
+    \begin{itemize}
+        \item getOpenFileName -- zwraca ścieżkę do aktualnie otwartego pliku.
+        \item toggleSideBar -- służy do zmiany widoczności bocznego panelu. Dostępna pod skrótem klawiszowym \texttt{F12}.
+        \item toggleWeights -- służy do zmiany widoczności etykiet wag. Dostępna pod skrótem klawiszowym \texttt{F1}.
+        \item toggleLabels -- służy do zmiany widoczności etykiet krawędzi. Dostępna pod skrótem klawiszowym \texttt{F2}.
+    \end{itemize}
+    \subsection{Klasa SidebarPanel}
+    Odpowiada za boczny panel pozwalający na konfiguracje parametrów programu i uruchomienie wizualizacji. Posiada następujące funkcje:
+    \begin{itemize}
+        \item buildUI -- tworzy elementy UI w bocznym panelu.
+        \item createColorSwatch -- tworzy przycisk odpowiadający za zmianę koloru.
+        \item addPlainText -- służy do tworzenia zwykłego tekstu.
+        \item addSectionTitle -- służy do tworzenia tekstu nagłówkowego.
+        \item createRowWithLabel -- tworzy panel, w którym umieszcza etykietę i element podany jako argument.
+        \item resetSettings -- przywraca domyślne wartości ustawień wizualizacji i odświeża interfejs.
+    \end{itemize}
+    \subsection{Klasa StatusBar}
+   Odpowiada za dolny pasek stanu programu. Posiada jedną funkcję publiczną i konstruktor:
+    \begin{itemize}
+        \item setStatus -- ustawia i aktualizuje treść komunikatu wyświetlanego użytkownikowi na pasku stanu.
+    \end{itemize}
 
-\begin{itemize}
-    \item centerThisText -- konfiguruje przekazaną etykietę tekstową, ustawiając jej kolor z motywu aplikacji oraz wyrównując ją do środka w osi X.
-    \item createImageIcon -- wczytuje plik graficzny logo, skaluje go do wymiarów 120x120 pikseli z użyciem wygładzania i zwraca jako wycentrowany komponent etykiety.
-\end{itemize}
+    \subsection{Klasa AboutWindow}
+
+    Odpowiada za wyświetlanie okna informacyjnego o programie (autorzy, wersja, link do repozytorium). Posiada dwie funkcje publiczne i konstruktor:
+
+    \begin{itemize}
+        \item centerThisText -- konfiguruje przekazaną etykietę tekstową, ustawiając jej kolor z motywu aplikacji oraz wyrównując ją do środka w osi X.
+        \item createImageIcon -- wczytuje plik graficzny logo, skaluje go do wymiarów 120x120 pikseli z użyciem wygładzania i zwraca jako wycentrowany komponent etykiety.
+    \end{itemize}
+
+    \section{Klasy przechowujące dane}
+
+    \subsection{Klasa Vertex} 
+    Odpowiada za przechowywanie pojedynczego wierzchołka, czyli jego pozycji i identyfikatora.
+
+    \subsection{Klasa Edge}
+    Odpowiada za przechowywanie pojedynczej krawędzi, czyli jej nazwy, wagi i wierzchołka początkowego i końcowego.
+
+    \section{Klasy dla ustawień programu}
+
+    \subsection{Klasa VisualizationSettings}
+
+    Odpowiada za przechowywanie obecnych ustawień programu (flagi określające widoczność etykiet krawędzi i wag oraz palete kolorów grafu). Klasa posiada jedynie konstruktor.
+
+    \subsection{Klasa AppTheme}
+    Odpowiada za zdefiniowanie domyślnej palety kolorów i czcionek.
 \end{document}
 --comment
