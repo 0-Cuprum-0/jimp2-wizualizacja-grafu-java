@@ -10,7 +10,7 @@ public class BackEnd {
 
     GraphVisualizerUI ui;
 
-    String selectedAlgorithm = "Fruchterman-Reingold";
+    Algorithm selectedAlgorithm = Algorithm.FRUCHTERMAN_REINGOLD;
 
     private File inputFile;
     private File outputFile;
@@ -30,14 +30,6 @@ public class BackEnd {
     }
 
     public void  launchC(){
-        String alg = "";
-
-        if("Fruchterman-Reingold".equals(selectedAlgorithm)){
-            alg = "FRE";
-        }
-        else if("Triangulacja".equals(selectedAlgorithm)){
-            alg = "TRI";
-        }
 
         try{
             if (inputFile == null) {
@@ -47,7 +39,7 @@ public class BackEnd {
             }
             String executablePath = System.getProperty("user.dir") + File.separator + "src_c" + File.separator + "a.out";
             ProcessBuilder pb =
-                new ProcessBuilder(executablePath,"-i", inputFile.getAbsolutePath(), "-t", "TXT", "-o", outputFile.getAbsolutePath(), "-a", alg);
+                new ProcessBuilder(executablePath,"-i", inputFile.getAbsolutePath(), "-t", "TXT", "-o", outputFile.getAbsolutePath(), "-a", selectedAlgorithm.getAbbreviation());
             pb.redirectErrorStream(true);
             Process process = pb.start();
 

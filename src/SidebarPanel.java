@@ -31,12 +31,12 @@ public class SidebarPanel extends JPanel {
         addSectionTitle("Parametry");
         addPlainText("Algorytm");
 
-        JComboBox<String> algorithmsChoice = new JComboBox<>(new String[] { "Fruchterman-Reingold", "Triangulacja" });
+        JComboBox<Algorithm> algorithmsChoice = new JComboBox<>(Algorithm.values());
         if(ui.engine.selectedAlgorithm != null) {
             algorithmsChoice.setSelectedItem(ui.engine.selectedAlgorithm);
         }
         algorithmsChoice.addActionListener(e -> {
-            ui.engine.selectedAlgorithm = (String) algorithmsChoice.getSelectedItem();
+            ui.engine.selectedAlgorithm = (Algorithm) algorithmsChoice.getSelectedItem();
         });
 
         algorithmsChoice.setAlignmentX(Component.CENTER_ALIGNMENT);
