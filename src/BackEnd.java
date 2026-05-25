@@ -39,14 +39,14 @@ public class BackEnd {
             }
             String executablePath = System.getProperty("user.dir") + File.separator + "src_c" + File.separator + "a.out";
             ProcessBuilder pb =
-                new ProcessBuilder(executablePath,"-i", inputFile.getAbsolutePath(), "-t", "TXT", "-o", outputFile.getAbsolutePath(), "-a", selectedAlgorithm.getAbbreviation());
+                new ProcessBuilder(executablePath,"-i", inputFile.getAbsolutePath(), "-t", "TXT", "-o", outputFile.getAbsolutePath(), "-a", selectedAlgorithm.getAbbreviation(),"-d");
             pb.redirectErrorStream(true);
             Process process = pb.start();
 
             // Odczytaj wyjście z procesu C, aby zobaczyć ewentualne błędy i komunikaty
+            String line;
             try (InputStreamReader isr = new InputStreamReader(process.getInputStream());
                  java.io.BufferedReader reader = new java.io.BufferedReader(isr)) {
-                String line;
                 System.out.println("--- Wyjście z programu C ---");
                 while ((line = reader.readLine()) != null) {
                     System.out.println(line);
@@ -58,7 +58,7 @@ public class BackEnd {
             System.out.println("Program w C zakończył się z kodem: " + exitCode);
 
             if(exitCode != 0) {
-                ui.showErrorMessage("Błąd: Nie udało się wykonać wizualizacji. Program obliczeniowy zakończył się z kodem: " + exitCode);
+                ui.showErrorMessage("Błąd: Nie udało się wykonać wizualizacji. " + line + "Program obliczeniowy zakończył się z kodem: " + exitCode);
                 return;
             }
         }

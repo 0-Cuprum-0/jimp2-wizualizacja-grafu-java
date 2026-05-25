@@ -1,0 +1,139 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam monochrome true
+skinparam shadowing false
+
+' Odstępy pionowe (ranksep) i poziome (nodesep)
+skinparam ranksep 80
+skinparam nodesep 30
+
+class Main {
+  + main(args: String[])
+}
+
+class GraphVisualizerUI {
+  ~ engine : BackEnd
+  ~ sidebar : SidebarPanel
+  ~ statusBar : StatusBar
+  ~ canvas : GraphCanvas
+  + settings : VisualizationSettings
+  + GraphVisualizerUI(engine: BackEnd)
+  + showErrorMessage(message: String)
+}
+
+class BackEnd {
+  ~ ui : GraphVisualizerUI
+  ~ selectedAlgorithm : String
+  ~ edges : List<Edge>
+  ~ vertices : List<Vertex>
+  ~ BackEnd()
+  + setUI(ui: GraphVisualizerUI)
+  + launchC()
+  + setInputFile(file: File)
+  + readInputFile(file: File) : int
+  + readOutputFile() : int
+  + checkIfInputFileExists() : boolean
+}
+
+class GraphCanvas {
+  ~ ui : GraphVisualizerUI
+  + baseVertexRadius : int
+  + GraphCanvas(ui: GraphVisualizerUI)
+  + resetCamera()
+  # paintComponent(g: Graphics)
+  + exportToPNG(file: File)
+}
+
+class TopMenuBar {
+  + TopMenuBar(ui: GraphVisualizerUI)
+  + getOpenFileName() : String
+  + toggleSideBar()
+  + toggleWeights()
+  + toggleLabels()
+}
+
+class SidebarPanel {
+  ~ ui : GraphVisualizerUI
+  + SidebarPanel(ui: GraphVisualizerUI)
+  + buildUI()
+}
+
+class StatusBar {
+  + StatusBar()
+  + setStatus(status: String)
+}
+
+class AboutWindow {
+  ~ ui : GraphVisualizerUI
+  + AboutWindow(ui: GraphVisualizerUI)
+  + centerThisText(label: JLabel)
+  + createImageIcon() : Component
+}
+
+class VisualizationSettings {
+  + showWeights : boolean
+  + showLabels : boolean
+  + edgeColor : Color
+  + bgColor : Color
+  + vertexColor : Color
+  + vertexTextColor : Color
+  + VisualizationSettings()
+}
+
+class AppTheme {
+  + BG_COLOR : Color {static}
+  + FG_COLOR : Color {static}
+  + ACCENT_COLOR : Color {static}
+  + VERTEX_DRAGGED_COLOR : Color {static}
+  + SECTION_FONT : Font {static}
+  + PLAIN_FONT : Font {static}
+  + setupGlobalFont() {static}
+}
+
+class Vertex {
+  + id : Integer
+  + x : double
+  + y : double
+  + Vertex(id: Integer, x: double, y: double)
+}
+
+class Edge {
+  + name : String
+  + u : Integer
+  + v : Integer
+  + weight : Double
+  + Edge(name: String, u: Integer, v: Integer, weight: Double)
+}
+
+' === RELACJE I UKŁAD W PIONIE ===
+
+Main -down-> GraphVisualizerUI : uruchamia >
+Main -down-> BackEnd : tworzy >
+
+' Rozbicie komponentów UI na układ pionowy za pomocą niewidzialnych linii
+GraphVisualizerUI *-- GraphCanvas
+GraphVisualizerUI *-- TopMenuBar
+
+GraphCanvas -[hidden]down-> SidebarPanel
+SidebarPanel -[hidden]down-> StatusBar
+StatusBar -[hidden]down-> VisualizationSettings
+
+GraphVisualizerUI *-- SidebarPanel
+GraphVisualizerUI *-- StatusBar
+GraphVisualizerUI *-- VisualizationSettings
+
+' BackEnd i jego podzespoły ułożone pionowo
+GraphVisualizerUI *-down- BackEnd
+BackEnd o-- Vertex : agreguje
+BackEnd o-- Edge : agreguje
+Vertex -[hidden]down-> Edge
+
+' Poboczne relacje dołożone na dole
+TopMenuBar .down.> AboutWindow : tworzy >
+
+GraphCanvas .down.> AppTheme : używa >
+SidebarPanel .down.> AppTheme : używa >
+TopMenuBar .down.> AppTheme : używa >
+StatusBar .down.> AppTheme : używa >
+
+@enduml

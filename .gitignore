@@ -33,6 +33,10 @@ bin/
 *syncthing*
 *sync-conflict*
 .run_this_shit.sh
+*.listing
+*.pdf
+*.synctex.gz
+*.toc
 *.aux 
 *.bcf 
 *.fdb_lat

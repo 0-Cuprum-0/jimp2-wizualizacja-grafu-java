@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2026/dev/Arch Linux)  (format=lualatex 2026.1.11)  20 MAY 2026 20:24
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2026/dev/Arch Linux)  (format=lualatex 2026.1.11)  25 MAY 2026 11:32
  restricted system commands enabled.
  file:line:error style messages enabled.
 **"/home/aleksander/Development/Java/JIMP 2/jimp2-wizualizacja-grafu-java/documentation/functional/dokumentacja_funkcjonalna"
@@ -1346,9 +1346,9 @@ Package luatex.def Info: ./assets/sukces.jpg  used on input line 139.
 \pydata@fh@_274698AB6A750DA52E951A6DC4043AEB.data.minted=\write9
 
 \openout9 = _274698AB6A750DA52E951A6DC4043AEB.data.minted
-runsystem(latexminted config  --timestamp 20260520202438 274698AB6A750DA52E951A6DC4043AEB)...executed.
+runsystem(latexminted config  --timestamp 20260525113216 274698AB6A750DA52E951A6DC4043AEB)...executed.
  (./_274698AB6A750DA52E951A6DC4043AEB.config.minted)
-runsystem(latexminted cleanconfig  --timestamp 20260520202438 274698AB6A750DA52E951A6DC4043AEB)...executed.
+runsystem(latexminted cleanconfig  --timestamp 20260525113216 274698AB6A750DA52E951A6DC4043AEB)...executed.
  (./_minted/default.style.minted) (./_minted/B07E95632540C8E8A15D3CDF489E95BE.highlight.minted
 
 Package fontspec Info: 
@@ -1403,7 +1403,7 @@ Here is how much of LuaTeX's memory you used:
  90 fonts using 400375439 bytes
  103i,9n,105p,1311b,1796s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/fonts/Iosevka/IosevkaNerdFont-Regular.ttf></usr/share/fonts/TTF/ArimoNerdFont-Bold.ttf></usr/share/fonts/TTF/ArimoNerdFont-Regular.ttf>
-Output written on dokumentacja_funkcjonalna.pdf (8 pages, 369258 bytes).
+Output written on dokumentacja_funkcjonalna.pdf (8 pages, 369257 bytes).
 
 PDF statistics: 202 PDF objects out of 1000 (max. 8388607)
  136 compressed objects within 2 object streams
