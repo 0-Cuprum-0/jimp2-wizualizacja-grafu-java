@@ -1,7 +1,10 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -24,6 +27,7 @@ public class BackEnd {
         String outputFilePath = System.getProperty("user.dir") + File.separator + "src_c" + File.separator + "output.txt";
         this.outputFile = new File(outputFilePath);
     }
+
 
     public void setUI(GraphVisualizerUI ui) {
         this.ui = ui;
@@ -126,4 +130,20 @@ public class BackEnd {
     public boolean checkIfInputFileExists(){
         return inputFile != null;
     }
+    public void writeToTxt(File file)
+        throws IOException {
+            String str = "Hello World";
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+            for (Vertex v : this.vertices){
+                writer.append("X: "+ v.x + " Y: "+ v.y);
+                writer.newLine(); 
+
+            }
+            writer.append(' ');
+           
+    
+            writer.close();
+
+    }
 }
+  

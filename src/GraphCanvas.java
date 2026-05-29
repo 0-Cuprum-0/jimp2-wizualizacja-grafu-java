@@ -1,11 +1,11 @@
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class GraphCanvas extends JPanel {
     
@@ -67,8 +67,14 @@ public class GraphCanvas extends JPanel {
             @Override
             public void mouseDragged(MouseEvent e) {
                 if (draggedVertex != null) {
+                    System.out.println("Before: " + draggedVertex.x + " "+ draggedVertex.y);
+                    //draggedVertex.printCoordinates();
                     draggedVertex.x = (e.getX() - offsetX) / zoomFactor;
                     draggedVertex.y = (e.getY() - offsetY) / zoomFactor;
+                        System.out.println("After: " + draggedVertex.x + " "+ draggedVertex.y);
+
+
+                   // draggedVertex.printCoordinates();
                 } else {
                     int dx = e.getX() - lastMousePos.x;
                     int dy = e.getY() - lastMousePos.y;
