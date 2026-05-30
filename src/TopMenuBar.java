@@ -22,10 +22,10 @@ public class TopMenuBar extends JMenuBar {
 	JMenuItem menuOpenComputed  = createStyledMenuItem("Wczytaj .txt do wizualizacji");
         menuOpenComputed.addActionListener(e -> openComputedFileAction());
 
-	menuFile.add(menuOpenComputed);
         menuFile.add(menuSavePng);
         menuFile.add(menuSaveTxt);
         menuFile.add(menuOpen);
+	menuFile.add(menuOpenComputed);
         add(menuFile);
 
         // --- Zakładka "Widok" ---

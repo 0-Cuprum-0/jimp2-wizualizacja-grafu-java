@@ -33,6 +33,18 @@ public class BackEnd {
         this.ui = ui;
     }
 
+    public  Vertex findVertexById(int id){
+	    Vertex result = null;
+	    for(Vertex v : this.vertices){
+		    if (v.id == id){
+			   result = v;
+		    }else{
+			    continue;
+		    }
+	    }
+	return result;
+    }	
+
     public void  launchC(){
 
         try{
@@ -101,7 +113,7 @@ public class BackEnd {
         return 0;
     }
     public void displayComputed(File file){
-	System.out.println("displayComputed() launched!");
+	
 
     }
     public int readOutputFile() {
@@ -134,16 +146,25 @@ public class BackEnd {
     public boolean checkIfInputFileExists(){
         return inputFile != null;
     }
+
+
+
     public void writeToTxt(File file)
         throws IOException {
-            String str = "Hello World";
+		System.out.println("!!! JAVA IS WRITING TO THIS EXACT LOCATION: " + file.getAbsolutePath());
             BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-            for (Vertex v : this.vertices){
-                writer.append("X: "+ v.x + " Y: "+ v.y);
-                writer.newLine(); 
+            for (Edge e : this.edges){
+		Vertex eu = findVertexById(e.u);
+		Vertex ev = findVertexById(e.v);
+		String line = String.format("%s %d %d %f %f %f %f %f", 
+                e.name, eu.id, ev.id, e.weight, eu.x, eu.y, ev.x, ev.y);
+		//writer.append("START");
+		System.out.println(line);
+		writer.write(line);
+		writer.newLine(); 
 
             }
-            writer.append(' ');
+            //writer.append(' ');
            
     
             writer.close();
