@@ -1,0 +1,29 @@
+# Fdb version 4
+["biber dokumentacja_funkcjonalna"] 0 "dokumentacja_funkcjonalna.bcf" "dokumentacja_funkcjonalna.bbl" "dokumentacja_funkcjonalna" 0 0
+  "bibliography.bib" 0 -1 0 ""
+  "dokumentacja_funkcjonalna.bcf" 0 -1 0 ""
+  (generated)
+  "dokumentacja_funkcjonalna.bbl"
+  "dokumentacja_funkcjonalna.blg"
+  (rewritten before read)
+["pdflatex"] 1779964267.73498 "dokumentacja_funkcjonalna.tex" "dokumentacja_funkcjonalna.pdf" "dokumentacja_funkcjonalna" 1779964267.83107 2
+  "/nix/store/8c27pm5hgpl3vza0y52k65laj46h9lag-texlive-2025-env/share/texmf-var/web2c/pdftex/pdflatex.fmt" 1 3398378 8dfec077f76980af5e9e21a3f24405c7 ""
+  "/nix/store/8c27pm5hgpl3vza0y52k65laj46h9lag-texlive-2025-env/share/texmf-var/web2c/texmf.cnf" 1 43847 21172f8b4cf98b5a4e0308424df4f9c2 ""
+  "/nix/store/936y3ibsg3cw4hw6q1hbxxjix46yjzjc-texlive-2025-env-texmfdist/tex/latex/base/article.cls" 1 20144 b966087dda3b194755eb460d32e2ef75 ""
+  "/nix/store/936y3ibsg3cw4hw6q1hbxxjix46yjzjc-texlive-2025-env-texmfdist/tex/latex/base/size10.clo" 1 8448 686612a86f0e04f41ea577f5ec7e83d8 ""
+  "/nix/store/936y3ibsg3cw4hw6q1hbxxjix46yjzjc-texlive-2025-env-texmfdist/tex/latex/etoolbox/etoolbox.sty" 1 46850 d87daedc2abdc653769a6f1067849fe0 ""
+  "/nix/store/936y3ibsg3cw4hw6q1hbxxjix46yjzjc-texlive-2025-env-texmfdist/tex/latex/fontspec/fontspec.sty" 1 3755 4872b99d810c024f9c09bb1c62ffee3b ""
+  "/nix/store/936y3ibsg3cw4hw6q1hbxxjix46yjzjc-texlive-2025-env-texmfdist/tex/latex/l3backend/l3backend-pdftex.def" 1 30351 a2b09edc6c93a742566b222c33d0278e ""
+  "/nix/store/936y3ibsg3cw4hw6q1hbxxjix46yjzjc-texlive-2025-env-texmfdist/tex/latex/l3kernel/expl3.sty" 1 6558 db46cd38cce12fa12acf8e91a16da9cd ""
+  "/nix/store/936y3ibsg3cw4hw6q1hbxxjix46yjzjc-texlive-2025-env-texmfdist/tex/latex/l3packages/xparse/xparse.sty" 1 9783 ab4bee47700c04aadedb8da27591b0ab ""
+  "/nix/store/936y3ibsg3cw4hw6q1hbxxjix46yjzjc-texlive-2025-env-texmfdist/tex/latex/polyglossia/polyglossia.sty" 1 61959 d7357910b95406b7d5409c0f134258c2 ""
+  "/nix/store/936y3ibsg3cw4hw6q1hbxxjix46yjzjc-texlive-2025-env-texmfdist/tex/latex/tools/longtable.sty" 1 15912 618223a798a4d829f4d8e1ccf24e518f ""
+  "dokumentacja_funkcjonalna.aux" 1779964266.29975 4543 7103d1091c42ec6f1ffccad9518bdcfe "pdflatex"
+  "dokumentacja_funkcjonalna.bbl" 0 -1 0 "biber dokumentacja_funkcjonalna"
+  "dokumentacja_funkcjonalna.tex" 1779964266.30175 6102 ff77eb8d67de76765b45f44e1b60e328 ""
+  "preamble.tex" 1779964266.30175 6543 e8584972971545a601100099b5e0c3a9 ""
+  (generated)
+  "dokumentacja_funkcjonalna.aux"
+  "dokumentacja_funkcjonalna.log"
+  "dokumentacja_funkcjonalna.pdf"
+  (rewritten before read)

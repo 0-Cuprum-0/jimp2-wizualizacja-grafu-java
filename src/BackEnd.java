@@ -100,6 +100,10 @@ public class BackEnd {
         }
         return 0;
     }
+    public void displayComputed(File file){
+	System.out.println("displayComputed() launched!");
+
+    }
     public int readOutputFile() {
         vertices.clear(); 
 

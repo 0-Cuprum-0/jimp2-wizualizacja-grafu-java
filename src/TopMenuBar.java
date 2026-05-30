@@ -17,9 +17,12 @@ public class TopMenuBar extends JMenuBar {
         menuSavePng.addActionListener(e -> saveFilePngAction());
         JMenuItem menuSaveTxt = createStyledMenuItem("Wyeksportuj jako .txt");
         menuSaveTxt.addActionListener(e -> saveFileTxtAction());
-        JMenuItem menuOpen  = createStyledMenuItem("Otwórz");
+        JMenuItem menuOpen  = createStyledMenuItem("Wczytaj .txt do obliczenia");
         menuOpen.addActionListener(e -> openFileAction());
+	JMenuItem menuOpenComputed  = createStyledMenuItem("Wczytaj .txt do wizualizacji");
+        menuOpenComputed.addActionListener(e -> openComputedFileAction());
 
+	menuFile.add(menuOpenComputed);
         menuFile.add(menuSavePng);
         menuFile.add(menuSaveTxt);
         menuFile.add(menuOpen);
@@ -127,7 +130,7 @@ public class TopMenuBar extends JMenuBar {
 
         // Ustawienie początkowego katalogu
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-        fileChooser.setDialogTitle("Otwórz plik wejściowy grafu");
+        fileChooser.setDialogTitle("Otwórz plik wejściowy grafu do obliczenia");
         fileChooser.setFileFilter(new FileNameExtensionFilter("Pliki tekstowe (*.txt)", "txt"));
 
         int result = fileChooser.showOpenDialog(this);
@@ -147,6 +150,32 @@ public class TopMenuBar extends JMenuBar {
         } else {
             ui.statusBar.setStatus("Anulowano operację odczytu pliku.");
         }
+    }
+    public void openComputedFileAction(){
+	  // Tworzymy okno dialogowe wyboru pliku
+        JFileChooser fileChooser = new JFileChooser();
+
+        // Ustawienie początkowego katalogu
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        fileChooser.setDialogTitle("Otwórz plik wejściowy grafu do wizualizacji");
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Pliki tekstowe (*.txt)", "txt"));
+        int result = fileChooser.showSaveDialog(this);
+        // Sprawdzamy, czy użytkownik kliknął "Zapisz"
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try{
+		    
+		ui.engine.displayComputed(selectedFile);
+                ui.statusBar.setStatus("Plik otwarty");
+            }
+            catch (Exception e) {
+                ui.statusBar.setStatus("Nie udało się zapisać pliku.");
+            }
+        } else {
+            ui.statusBar.setStatus("Anulowano operację zapisu pliku.");
+        }
+
+
     }
 
     public String getOpenFileName() {
