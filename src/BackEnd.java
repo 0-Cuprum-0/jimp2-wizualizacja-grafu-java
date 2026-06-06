@@ -112,8 +112,45 @@ public class BackEnd {
         }
         return 0;
     }
-    public void displayComputed(File file){
-	
+    public int displayComputed(File file){
+	 vertices.clear(); 
+	 edges.clear();
+
+        try (Scanner scanner = new Scanner(file)) {
+            scanner.useLocale(Locale.US);
+
+            while (scanner.hasNext()) {
+		String name = scanner.next();
+                Integer id1 = scanner.nextInt();
+		Integer id2 = scanner.nextInt();
+		Double weight = scanner.nextDouble();
+                double x1 = scanner.nextDouble();
+                double y1 = scanner.nextDouble();
+		double x2 = scanner.nextDouble();
+                double y2 = scanner.nextDouble();
+                Vertex newVertex1 = new Vertex(id1, x1, y1);
+		Edge newEdge = new Edge(name, id1, id2, weight);
+                Vertex newVertex2 = new Vertex(id2, x2, y2);
+                vertices.add(newVertex1);
+                edges.add(newEdge);
+
+                vertices.add(newVertex2);
+            }
+	    //this.inputFile = file;
+            
+            System.out.println("Pomyślnie wczytano " + vertices.size() + " wierzchołków.");
+            return vertices.size();
+
+        } catch (FileNotFoundException e) {
+            System.err.println("BŁĄD: Nie można znaleźć pliku - " + this.outputFile.getAbsolutePath());
+            ui.showErrorMessage("BŁĄD: Nie można znaleźć pliku - " + this.outputFile.getAbsolutePath());
+        } catch (Exception e) {
+            System.err.println("BŁĄD: " + e.getMessage());
+            ui.showErrorMessage("BŁĄD: " + e.getMessage());
+        }
+
+        return 0;
+
 
     }
     public int readOutputFile() {
@@ -154,15 +191,20 @@ public class BackEnd {
 		System.out.println("!!! JAVA IS WRITING TO THIS EXACT LOCATION: " + file.getAbsolutePath());
             BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
             for (Edge e : this.edges){
+		
 		Vertex eu = findVertexById(e.u);
 		Vertex ev = findVertexById(e.v);
+		if(eu != null && ev != null){
+
+			System.out.println(ev);
+			
 		String line = String.format("%s %d %d %f %f %f %f %f", 
                 e.name, eu.id, ev.id, e.weight, eu.x, eu.y, ev.x, ev.y);
 		//writer.append("START");
 		System.out.println(line);
 		writer.write(line);
 		writer.newLine(); 
-
+		}
             }
             //writer.append(' ');
            

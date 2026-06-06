@@ -159,7 +159,7 @@ public class TopMenuBar extends JMenuBar {
         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
         fileChooser.setDialogTitle("Otwórz plik wejściowy grafu do wizualizacji");
         fileChooser.setFileFilter(new FileNameExtensionFilter("Pliki tekstowe (*.txt)", "txt"));
-        int result = fileChooser.showSaveDialog(this);
+        int result = fileChooser.showOpenDialog(this);
         // Sprawdzamy, czy użytkownik kliknął "Zapisz"
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
@@ -167,12 +167,14 @@ public class TopMenuBar extends JMenuBar {
 		    
 		ui.engine.displayComputed(selectedFile);
                 ui.statusBar.setStatus("Plik otwarty");
+		ui.canvas.repaint();
+                ui.canvas.resetCamera();
             }
             catch (Exception e) {
-                ui.statusBar.setStatus("Nie udało się zapisać pliku.");
+                ui.statusBar.setStatus("Nie udało się otworzyć pliku.");
             }
         } else {
-            ui.statusBar.setStatus("Anulowano operację zapisu pliku.");
+            ui.statusBar.setStatus("Anulowano operację otwierania pliku.");
         }
 
 
