@@ -31,7 +31,7 @@
 		\item Wybór trybu wpisywania lub wczytywania i jeden z dostępnych formatów takich plików.
 		\item Wybór algorytmu, który będzie obliczał współrzędne wierzchołków grafu.
 		\item Możliwość zmiany palety kolorów grafu oraz rozmiaru promienia wierzchołków.
-		\item Zapisywanie informacji o położeniu wierzchołków po ich rozmieszczeniu do pliku tekstowego lub binarnego.
+		\item Zapisywanie informacji o położeniu wierzchołków po ich rozmieszczeniu do pliku tekstowego.
 		\item Graficzne przedstawienie elementów grafu: wierzchołki, krawędzie, wagi, etykiety.
 		\item Możliwość poruszania się po przestrzeni na której znajduje się graf.
 		\item Kontrola nad graficzną reprezentacją grafu: zmiana palety kolorów, ukrycie poszczególnych elementów.
@@ -230,6 +230,7 @@ DB   4  2  1.407
         \item readInputFile -- parsuje zawartość pliku wejściowego, dodając odczytane obiekty do listy krawędzi (\texttt{edges}). Zwraca liczbę wczytanych elementów.
         \item readOutputFile -- parsuje zawartość pliku wyjściowego wygenerowanego przez algorytm, aktualizując współrzędne w liście wierzchołków (\texttt{vertices}). Zwraca liczbę poprawnie wczytanych wierzchołków.
         \item checkIfInputFileExists -- zwraca wartość logiczną informującą, czy plik wejściowy został wcześniej wybrany i załadowany.
+        \item writeToTxt -- pozwala na zapisanie pozycji wierzchołków do pliku tekstowego.
     \end{itemize}
 
     \section{Klasy elementów UI}
@@ -252,6 +253,7 @@ DB   4  2  1.407
         \item createStyledMenuItem -- tworzy nowy element menu zgodnie z paletą kolorów.
         \item saveFileAction -- otwiera okno dialogowe do zapisu pliku, wywołuje funkcje eksportującą graf do pliku PNG z klasy \texttt{GraphCanvas}, a następnie pokazuje komunikat w pasku stanu.
         \item openFileAction -- otwiera okno dialogowe do odczytu pliku, wywołuje funkcje wczytującą plik z klasy \texttt{BackEnd}, a następnie pokazuje komunikat w pasku stanu.
+        \item saveFileTxtAction -- otwiera okno dialogowe do zapisu pliku, wywołuje funkcje zapisującą pozycję wierzchołków do pliku TXT.
     \end{itemize}
     Oraz funkcje publiczne:
     \begin{itemize}
@@ -305,14 +307,3 @@ DB   4  2  1.407
     \section{Uwagi do zewnętrznego modułu obliczeniowego}
     Należy zaznaczyć, że dostarczony przez inny zespół moduł obliczeniowy w języku C nie w pełni realizował założenia opisane w jego dokumentacji. W szczególności program nie weryfikował, czy wprowadzony graf jest planarny oraz spójny. Ponadto implementacja algorytmu Fruchterman-Reingold nie funkcjonowała poprawnie, co wymagało z naszej strony ingerencji w kod źródłowy i naprawienia napotkanych błędów. Dodatkowym problemem, utrudniającym interpretację wyników, był brak odpowiedniej obsługi błędów. Komunikaty diagnostyczne zadeklarowane w dokumentacji modułu nie były generowane w przypadku niepowodzenia, co udowodniła weryfikacja z użyciem testowych zestawów danych dostarczonych przez autorów tamtego rozwiązania.
 \end{document}
---comment
-
-    Odpowiada za przechowywanie obecnych ustawień programu (flagi określające widoczność etykiet krawędzi i wag oraz palete kolorów grafu). Klasa posiada jedynie konstruktor.
-
-    \subsection{Klasa AppTheme}
-    Odpowiada za zdefiniowanie domyślnej palety kolorów i czcionek.
-
-    \section{Uwagi do zewnętrznego modułu obliczeniowego}
-    Należy zaznaczyć, że dostarczony przez inny zespół moduł obliczeniowy w języku C nie w pełni realizował założenia opisane w jego dokumentacji. W szczególności program nie weryfikował, czy wprowadzony graf jest planarny oraz spójny. Ponadto implementacja algorytmu Fruchterman-Reingold nie funkcjonowała poprawnie, co wymagało z naszej strony ingerencji w kod źródłowy i naprawienia napotkanych błędów. Dodatkowym problemem, utrudniającym interpretację wyników, był brak odpowiedniej obsługi błędów. Komunikaty diagnostyczne zadeklarowane w dokumentacji modułu nie były generowane w przypadku niepowodzenia, co udowodniła weryfikacja z użyciem testowych zestawów danych dostarczonych przez autorów tamtego rozwiązania.
-\end{document}
---comment

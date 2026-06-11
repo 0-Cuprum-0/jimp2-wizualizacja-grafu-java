@@ -72,6 +72,11 @@ public class TopMenuBar extends JMenuBar {
     }
 
     private void saveFilePngAction() {
+        if(ui.engine.vertices == null || ui.engine.vertices.isEmpty()){
+            ui.showErrorMessage("Nie można zapisać pliku, ponieważ nie wykonano jeszcze wizualizacji.");
+            return;
+        }
+
         // Tworzymy okno dialogowe wyboru pliku
         JFileChooser fileChooser = new JFileChooser();
 
@@ -85,7 +90,9 @@ public class TopMenuBar extends JMenuBar {
         // Sprawdzamy, czy użytkownik kliknął "Zapisz"
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
+
             try{
+                
                 ui.canvas.exportToPNG(selectedFile);
                 ui.statusBar.setStatus("Plik został zapisany.");
             }
@@ -97,6 +104,11 @@ public class TopMenuBar extends JMenuBar {
         }
     }
     private void saveFileTxtAction(){
+        if(ui.engine.vertices == null || ui.engine.vertices.isEmpty()){
+            ui.showErrorMessage("Nie można zapisać pliku, ponieważ nie wykonano jeszcze wizualizacji.");
+            return;
+        }
+
         // Tworzymy okno dialogowe wyboru pliku
         JFileChooser fileChooser = new JFileChooser();
 
@@ -108,6 +120,7 @@ public class TopMenuBar extends JMenuBar {
         // Sprawdzamy, czy użytkownik kliknął "Zapisz"
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
+
             try{
                 ui.engine.writeToTxt(selectedFile);
                 ui.statusBar.setStatus("Plik został zapisany.");

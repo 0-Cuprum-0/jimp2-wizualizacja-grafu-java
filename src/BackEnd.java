@@ -132,7 +132,6 @@ public class BackEnd {
     }
     public void writeToTxt(File file)
         throws IOException {
-            String str = "Hello World";
             BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
             for (Vertex v : this.vertices){
                 writer.append("X: "+ v.x + " Y: "+ v.y);
